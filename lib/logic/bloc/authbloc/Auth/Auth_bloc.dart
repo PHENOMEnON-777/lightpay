@@ -20,5 +20,15 @@ class AuthBloc extends Bloc<AuthEvent,AuthState>{
         emit(AuthState.registrationFailure(message: e.toString()));
       }
     });
+
+    on<LoginUser>((event, emit) async{
+      emit(AuthState.loadinglogin());
+      try {
+        final response = await authenticationRepository.loginUser(user: event.user);
+        emit(AuthState.loginSuccess(response: response));
+      } catch (e) {
+        emit(AuthState.loginFailure(message: e.toString()));
+      }
+    });
   }
 }

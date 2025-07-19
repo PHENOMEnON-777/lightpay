@@ -68,6 +68,14 @@ class _AuthState extends State<LoginWidget>
     final screenHeight = MediaQuery.of(context).size.height;
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
+        if(state is LoginSuccess){
+          Navigator.of(context).popAndPushNamed(Pagenavigation.tabscreen);
+        }
+        if(state is LoginFailure){
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.message)),
+          );
+        }
         if(state is RegistrationSuccess){
           Navigator.of(context).popAndPushNamed(Pagenavigation.tabscreen);
         }else if (state is RegistrationFailure) {
@@ -267,13 +275,13 @@ class _AuthState extends State<LoginWidget>
                               phone: numberController.text.trim(),
                             );
                             if(_authMode == AuthMode.login){
-// comming soon
+                              context.read<AuthBloc>().add(AuthEvent.loginUser(user: user.copyWith(email: emailController.text.trim(),password: passwordController.text.trim())));
                             }else{
                             context.read<AuthBloc>().add(AuthEvent.registerUser(user: user),);
                             }
                           }
                         },
-                        child:state is LoadInProgress ? CircularProgressIndicator(strokeWidth: 2,) : Text(
+                        child:state is LoadInProgress || state is LoadingLogin ? CircularProgressIndicator(strokeWidth: 2,) : Text(
                           _authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP',
                         ),
                       ),
