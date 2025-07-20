@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lightpay/data/provider/repository/Basedauthenticationrepository.dart';
+import 'package:lightpay/data/provider/repository/transactionrepository.dart';
 import 'package:lightpay/data/provider/server/authenticationRepository.dart';
+import 'package:lightpay/data/provider/server/transactionserverservices.dart';
 import 'package:lightpay/logic/bloc/authbloc/Auth/Auth_bloc.dart';
+import 'package:lightpay/logic/bloc/transactionbloc/Transaction/Transaction_bloc.dart';
 import 'package:lightpay/presentation/screens/loginscreen.dart';
 import 'package:lightpay/routers/route.dart';
 // import 'package:lightpay/routers/route.dart';
@@ -30,15 +33,16 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (context) => AuthenticationRepository(authenticationServerservice: AuthenticationServerservice())
+          create: (context) => AuthenticationRepository(authenticationServerservice: AuthenticationServerservice()),
            ),
+           RepositoryProvider(create: (context)=> TransactionRepository(transactionServerServices: TransactionServerServices()))
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => AuthBloc(authenticationRepository: AuthenticationRepository(authenticationServerservice: AuthenticationServerservice()))
           ),
-       
+       BlocProvider(create: (context)=>TransactionBloc(transactionrepository: TransactionRepository(transactionServerServices: TransactionServerServices())))
           // BlocProvider(create: (context) => InternetBloc()),
           // BlocProvider(create: (context) => ThemeBloc(isLightMode: islightmode)),
         ],

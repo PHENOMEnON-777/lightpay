@@ -47,5 +47,28 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NFCReaderUsageDescription</key>
+    <string>This app uses NFC to read payment cards and tags for secure transactions.</string>
+    
+    <!-- NFC Tag Reading Capability -->
+    <key>com.apple.developer.nfc.readersession.formats</key>
+    <array>
+        <string>NDEF</string>
+        <string>TAG</string>
+    </array>
+    <key>com.apple.developer.nfc.readersession.felica.systemcodes</key>
+    <array>
+    <string>8005</string>
+    <string>8008</string>
+    </array>
+    <!-- Optional: Specify supported NFC tag types -->
+    <key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+    <array>
+        <string>A0000000041010</string> <!-- Visa -->
+        <string>A0000000031010</string> <!-- Visa Electron -->
+        <string>A0000000032010</string> <!-- Visa Plus -->
+        <string>A0000000025010</string> <!-- American Express -->
+        <string>A0000000041010</string> <!-- Mastercard -->
+    </array>
 </dict>
 </plist>

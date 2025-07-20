@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lightpay/constants/pagenavigation.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
 class SelectPaymentMethod extends StatefulWidget {
   const SelectPaymentMethod({super.key});
@@ -12,10 +13,10 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
-
+  
   @override
   void initState() {
-    super.initState();
+    super.initState();    
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 600),
@@ -38,13 +39,13 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width ,
-      height: MediaQuery.of(context).size.height *0.4,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.4,
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            const Text(
               'Select Payment Method',
               style: TextStyle(
                 fontSize: 22,
@@ -52,7 +53,7 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
               ),
             ),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'All payment methods are secure and encrypted',
               style: TextStyle(
                 fontSize: 14,
@@ -69,8 +70,18 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
                   context,
                   icon: Icons.contactless_sharp,
                   title: 'Pay with NFC',
-                  onTap: () {
-                    Navigator.of(context).pushNamed(Pagenavigation.nfcpaymentscreen);
+                  onTap: () async {
+                    try {
+                      final isAvailable = await NfcManager.instance.isAvailable();  
+                                          
+                      if (isAvailable) {
+                        Navigator.of(context).pushNamed(Pagenavigation.nfcpaymentscreen);
+                      } else {
+                        _showNfcNotAvailableDialog();
+                      }
+                    } catch (e) {
+                      _showNfcNotAvailableDialog();
+                    }
                   },
                 ),
               ),
@@ -97,13 +108,36 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
     );
   }
 
-  Widget _buildPaymentCard(BuildContext context, {required IconData icon, required String title, required VoidCallback onTap}) {
+  void _showNfcNotAvailableDialog() {
+    showDialog(
+      context: context, 
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('NFC Not Available !!!'),
+          content: const Text('NFC technology is not available on this device. Please use QR Code payment instead.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      }
+    );
+  }
+
+  Widget _buildPaymentCard(
+    BuildContext context, {
+    required IconData icon, 
+    required String title, 
+    required VoidCallback onTap
+  }) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(15),
       child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.12,
-          width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.12,
+        width: MediaQuery.of(context).size.width * 0.9,
         child: Card(
           child: Center(
             child: ListTile(
@@ -113,12 +147,12 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
               ),
               title: Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Icons.arrow_forward_ios,
                 size: 25,
               ),
@@ -135,10 +169,6 @@ void showPaymentOptions(BuildContext context) {
     context: context,
     isScrollControlled: true,
     showDragHandle: true,
-    // backgroundColor: Colors.transparent,
-    //   shape: const RoundedRectangleBorder( // Rounded top corners for the bottom sheet itself
-    //   borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-    // ),
     builder: (context) => const SelectPaymentMethod(),
   );
 }

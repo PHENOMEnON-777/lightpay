@@ -7,7 +7,6 @@ import 'package:lightpay/data/provider/server/authenticationRepository.dart';
  class AuthenticationRepository {
  final AuthenticationServerservice authenticationServerservice;
  AuthenticationRepository({required this.authenticationServerservice});
-
 Future<AppResponse<Map<String,dynamic>>> registerUser({required User user}) async {
   try {
     final response = await authenticationServerservice.registerUser(user: user);
@@ -24,8 +23,6 @@ Future<AppResponse<Map<String,dynamic>>> loginUser({required User user}) async {
     final pinCode = response.data!['user']['pin_code'] ?? '0000';
 
     if(accesstoken!=null){
-      print(pinCode);
-    print(accesstoken);
       await storage.write(key: 'token', value: accesstoken);
       await storage.write(key: 'pin_code', value: pinCode);
     }
