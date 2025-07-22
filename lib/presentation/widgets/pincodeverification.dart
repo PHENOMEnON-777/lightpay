@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 
-Future<bool> promptUserPinCode(BuildContext context,) async {
+Future<bool> promptUserPinCode(BuildContext context,final Function onRestartfunc) async {
   final screenHeight = MediaQuery.of(context).size.height;
   final storage = FlutterSecureStorage();
   final storedPin = await storage.read(key: 'pin_code');
@@ -74,7 +74,9 @@ Future<bool> promptUserPinCode(BuildContext context,) async {
               }
             }, icon: Icon(Icons.fingerprint,size: 30,)),
             TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
+              onPressed: () {
+                        Navigator.of(context).pop();
+              },
               child: const Text("Cancel"),
             ),
             ElevatedButton(

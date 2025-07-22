@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Transaction {
 
- String get amount;
+ int get amount;
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $TransactionCopyWith<$Res>  {
   factory $TransactionCopyWith(Transaction value, $Res Function(Transaction) _then) = _$TransactionCopyWithImpl;
 @useResult
 $Res call({
- String amount
+ int amount
 });
 
 
@@ -68,7 +68,7 @@ class _$TransactionCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? amount = null,}) {
   return _then(_self.copyWith(
 amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
-as String,
+as int,
   ));
 }
 
@@ -150,7 +150,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String amount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int amount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Transaction() when $default != null:
 return $default(_that.amount);case _:
@@ -171,7 +171,7 @@ return $default(_that.amount);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String amount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int amount)  $default,) {final _that = this;
 switch (_that) {
 case _Transaction():
 return $default(_that.amount);}
@@ -188,7 +188,7 @@ return $default(_that.amount);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String amount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int amount)?  $default,) {final _that = this;
 switch (_that) {
 case _Transaction() when $default != null:
 return $default(_that.amount);case _:
@@ -206,7 +206,7 @@ class _Transaction implements Transaction {
    _Transaction({required this.amount});
   factory _Transaction.fromJson(Map<String, dynamic> json) => _$TransactionFromJson(json);
 
-@override final  String amount;
+@override final  int amount;
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
@@ -241,7 +241,7 @@ abstract mixin class _$TransactionCopyWith<$Res> implements $TransactionCopyWith
   factory _$TransactionCopyWith(_Transaction value, $Res Function(_Transaction) _then) = __$TransactionCopyWithImpl;
 @override @useResult
 $Res call({
- String amount
+ int amount
 });
 
 
@@ -261,7 +261,7 @@ class __$TransactionCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? amount = null,}) {
   return _then(_Transaction(
 amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
-as String,
+as int,
   ));
 }
 

@@ -20,10 +20,11 @@ class TransactionServerServices {
 
   Future<AppResponse<Map<String,dynamic>>> initiatTransaction({required Transaction transaction}) async {
     final token = await getAccessToken();
-  final response = await http.post(Uri.parse(Endpoints.initRecharge,),
+  final response = await http.post(Uri.parse(Endpoints.initTransaction,),
    headers: {'Content-Type': 'application/json', 'Accept': 'application/json',"Authorization": "Bearer $token" },
-    body:jsonEncode(transaction.copyWith(amount:transaction.amount)),
+    body:jsonEncode(transaction.copyWith(amount:transaction.amount).toJson()),
   );
+  print(response.body);
   final responseData = jsonDecode(response.body) as Map<String, dynamic>;
   return AppResponse<Map<String,dynamic>>.fromJson(responseData,  (json) =>json as Map<String,dynamic>,
   );

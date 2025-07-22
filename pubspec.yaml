@@ -43,6 +43,8 @@ dependencies:
   nfc_manager: ^4.0.2
   mobile_scanner: ^7.0.1
   pretty_qr_code: ^3.4.0
+  permission_handler: ^12.0.1
+  android_intent_plus: ^5.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

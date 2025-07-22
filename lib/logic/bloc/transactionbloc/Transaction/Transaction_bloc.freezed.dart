@@ -388,70 +388,30 @@ as String,
 /// @nodoc
 mixin _$TransactionEvent {
 
- Transaction get transaction;
-/// Create a copy of TransactionEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$TransactionEventCopyWith<TransactionEvent> get copyWith => _$TransactionEventCopyWithImpl<TransactionEvent>(this as TransactionEvent, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionEvent&&(identical(other.transaction, transaction) || other.transaction == transaction));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionEvent);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,transaction);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TransactionEvent(transaction: $transaction)';
+  return 'TransactionEvent()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $TransactionEventCopyWith<$Res>  {
-  factory $TransactionEventCopyWith(TransactionEvent value, $Res Function(TransactionEvent) _then) = _$TransactionEventCopyWithImpl;
-@useResult
-$Res call({
- Transaction transaction
-});
-
-
-$TransactionCopyWith<$Res> get transaction;
-
-}
-/// @nodoc
-class _$TransactionEventCopyWithImpl<$Res>
-    implements $TransactionEventCopyWith<$Res> {
-  _$TransactionEventCopyWithImpl(this._self, this._then);
-
-  final TransactionEvent _self;
-  final $Res Function(TransactionEvent) _then;
-
-/// Create a copy of TransactionEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? transaction = null,}) {
-  return _then(_self.copyWith(
-transaction: null == transaction ? _self.transaction : transaction // ignore: cast_nullable_to_non_nullable
-as Transaction,
-  ));
-}
-/// Create a copy of TransactionEvent
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$TransactionCopyWith<$Res> get transaction {
-  
-  return $TransactionCopyWith<$Res>(_self.transaction, (value) {
-    return _then(_self.copyWith(transaction: value));
-  });
-}
+class $TransactionEventCopyWith<$Res>  {
+$TransactionEventCopyWith(TransactionEvent _, $Res Function(TransactionEvent) __);
 }
 
 
@@ -469,11 +429,12 @@ extension TransactionEventPatterns on TransactionEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( InitiatTransaction value)?  transactionInitiation,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( InitiatTransaction value)?  transactionInitiation,TResult Function( Reset value)?  reset,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case InitiatTransaction() when transactionInitiation != null:
-return transactionInitiation(_that);case _:
+return transactionInitiation(_that);case Reset() when reset != null:
+return reset(_that);case _:
   return orElse();
 
 }
@@ -491,11 +452,12 @@ return transactionInitiation(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( InitiatTransaction value)  transactionInitiation,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( InitiatTransaction value)  transactionInitiation,required TResult Function( Reset value)  reset,}){
 final _that = this;
 switch (_that) {
 case InitiatTransaction():
-return transactionInitiation(_that);}
+return transactionInitiation(_that);case Reset():
+return reset(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -509,11 +471,12 @@ return transactionInitiation(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( InitiatTransaction value)?  transactionInitiation,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( InitiatTransaction value)?  transactionInitiation,TResult? Function( Reset value)?  reset,}){
 final _that = this;
 switch (_that) {
 case InitiatTransaction() when transactionInitiation != null:
-return transactionInitiation(_that);case _:
+return transactionInitiation(_that);case Reset() when reset != null:
+return reset(_that);case _:
   return null;
 
 }
@@ -530,10 +493,11 @@ return transactionInitiation(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Transaction transaction)?  transactionInitiation,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Transaction transaction)?  transactionInitiation,TResult Function()?  reset,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case InitiatTransaction() when transactionInitiation != null:
-return transactionInitiation(_that.transaction);case _:
+return transactionInitiation(_that.transaction);case Reset() when reset != null:
+return reset();case _:
   return orElse();
 
 }
@@ -551,10 +515,11 @@ return transactionInitiation(_that.transaction);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Transaction transaction)  transactionInitiation,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Transaction transaction)  transactionInitiation,required TResult Function()  reset,}) {final _that = this;
 switch (_that) {
 case InitiatTransaction():
-return transactionInitiation(_that.transaction);}
+return transactionInitiation(_that.transaction);case Reset():
+return reset();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -568,10 +533,11 @@ return transactionInitiation(_that.transaction);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Transaction transaction)?  transactionInitiation,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Transaction transaction)?  transactionInitiation,TResult? Function()?  reset,}) {final _that = this;
 switch (_that) {
 case InitiatTransaction() when transactionInitiation != null:
-return transactionInitiation(_that.transaction);case _:
+return transactionInitiation(_that.transaction);case Reset() when reset != null:
+return reset();case _:
   return null;
 
 }
@@ -586,11 +552,11 @@ class InitiatTransaction implements TransactionEvent {
   const InitiatTransaction({required this.transaction});
   
 
-@override final  Transaction transaction;
+ final  Transaction transaction;
 
 /// Create a copy of TransactionEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $InitiatTransactionCopyWith<InitiatTransaction> get copyWith => _$InitiatTransactionCopyWithImpl<InitiatTransaction>(this, _$identity);
 
@@ -616,13 +582,13 @@ String toString() {
 /// @nodoc
 abstract mixin class $InitiatTransactionCopyWith<$Res> implements $TransactionEventCopyWith<$Res> {
   factory $InitiatTransactionCopyWith(InitiatTransaction value, $Res Function(InitiatTransaction) _then) = _$InitiatTransactionCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  Transaction transaction
 });
 
 
-@override $TransactionCopyWith<$Res> get transaction;
+$TransactionCopyWith<$Res> get transaction;
 
 }
 /// @nodoc
@@ -635,7 +601,7 @@ class _$InitiatTransactionCopyWithImpl<$Res>
 
 /// Create a copy of TransactionEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? transaction = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? transaction = null,}) {
   return _then(InitiatTransaction(
 transaction: null == transaction ? _self.transaction : transaction // ignore: cast_nullable_to_non_nullable
 as Transaction,
@@ -653,5 +619,37 @@ $TransactionCopyWith<$Res> get transaction {
   });
 }
 }
+
+/// @nodoc
+
+
+class Reset implements TransactionEvent {
+  const Reset();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Reset);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'TransactionEvent.reset()';
+}
+
+
+}
+
+
+
 
 // dart format on

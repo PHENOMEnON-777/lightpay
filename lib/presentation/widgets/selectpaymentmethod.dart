@@ -72,8 +72,7 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
                   title: 'Pay with NFC',
                   onTap: () async {
                     try {
-                      final isAvailable = await NfcManager.instance.isAvailable();  
-                                          
+                      final isAvailable = await NfcManager.instance.isAvailable();
                       if (isAvailable) {
                         Navigator.of(context).pushNamed(Pagenavigation.nfcpaymentscreen);
                       } else {

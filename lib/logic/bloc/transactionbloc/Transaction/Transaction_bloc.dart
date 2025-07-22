@@ -12,13 +12,16 @@ class TransactionBloc extends Bloc<TransactionEvent,TransactionState>{
  final TransactionRepository transactionrepository;
   TransactionBloc({required this.transactionrepository}) : super(const TransactionState.initial()){
     on<InitiatTransaction>((event, emit) async {
-      emit(TransactionState.loadinpaymentinitiation());
-      try {
-        final response = await transactionrepository.initiatTransaction(transaction:event.transaction );
-        emit(TransactionState.paymentinitiationSuccessfull(response: response));
-      } catch (e) {
-        emit(TransactionState.paymentinitiationFailed(errormessga: e.toString()));
-      }
+          emit(const TransactionState.loadinpaymentinitiation());
+          try {
+            final response = await transactionrepository.initiatTransaction(transaction: event.transaction);
+            emit(TransactionState.paymentinitiationSuccessfull(response: response));
+          } catch (e) {
+            emit(TransactionState.paymentinitiationFailed(errormessga: e.toString()));
+          }
     });
+    on<Reset>((event, emit) {
+        emit(const TransactionState.initial());
+       });
   }
 }

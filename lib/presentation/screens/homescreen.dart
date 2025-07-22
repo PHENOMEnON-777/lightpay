@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ),
                             GestureDetector(
                               onTap: ()async {
-                                 bool pinVerified = await promptUserPinCode(context);
+                                 bool pinVerified = await promptUserPinCode(context,(_){});
                                  if (pinVerified == true) { 
                                 setState((){
                                  _isBalanceVisible = !_isBalanceVisible;

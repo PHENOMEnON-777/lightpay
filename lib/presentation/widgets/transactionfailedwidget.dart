@@ -1,14 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lightpay/logic/bloc/transactionbloc/Transaction/Transaction_bloc.dart';
+import 'package:lightpay/presentation/widgets/nfcanimationwidget.dart';
 
 class TransactionFailedWidget extends StatefulWidget {
   final String errorMessage;
-  late final  bool showTransactionResult;
   final Function onRestartfunc;
-  TransactionFailedWidget({
+ const TransactionFailedWidget({
     Key? key,
     required this.errorMessage,
-    required this.showTransactionResult,
     required this.onRestartfunc,
   }) : super(key: key);
 
@@ -91,10 +92,12 @@ class _TransactionFailedWidgetState extends State<TransactionFailedWidget> {
           width: double.infinity,
           child: ElevatedButton.icon(
             onPressed: () {
-              setState(() {
-                widget.showTransactionResult = false;
-              });
-              widget.onRestartfunc;
+            // context.read<TransactionBloc>().add(TransactionEvent.reset());
+                          setState(() {
+                            context.read<TransactionBloc>().add(TransactionEvent.reset());
+                          widget.onRestartfunc;
+                            NFCAnimationState.scanning;
+                          });
             },
             icon: const Icon(Icons.refresh),
             label: const Text('Try Again'),
@@ -110,6 +113,6 @@ class _TransactionFailedWidgetState extends State<TransactionFailedWidget> {
           ),
         ),
       ],
-    );;
+    );
   }
 }
