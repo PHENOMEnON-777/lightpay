@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lightpay/data/model/appresponsemodel.dart/appresponse.dart';
+import 'package:lightpay/data/model/transaction/sendmoney/sendmoney.dart';
 import 'package:lightpay/data/model/transaction/transaction.dart';
 import 'package:lightpay/data/provider/repository/transactionrepository.dart';
 
@@ -22,6 +23,17 @@ class TransactionBloc extends Bloc<TransactionEvent,TransactionState>{
     });
     on<Reset>((event, emit) {
         emit(const TransactionState.initial());
+       });
+
+
+       on<SendMoneyToAnotherAccount>((event, emit) async{
+        emit(const TransactionState.loadingtosendmoney());
+        try {
+          final response = await transactionrepository.sendMoney(sendmoney: event.sendmoney);
+          emit(TransactionState.sendMoneySuccessfully(response: response));
+        } catch (e) {
+          emit(TransactionState.sendMoneyFailed(errromessage: e.toString()));
+        }
        });
   }
 }

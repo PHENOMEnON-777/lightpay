@@ -6,6 +6,13 @@ import 'package:lightpay/logic/bloc/authbloc/Auth/Auth_bloc.dart';
 import 'package:lightpay/presentation/widgets/pincodeverification.dart';
 import 'package:lightpay/presentation/widgets/selectpaymentmethod.dart';
 
+
+
+enum Menuoptions {
+  appmode,
+  settings,
+}
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -117,11 +124,42 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                       Row(
                         children: [
-                          _buildHeaderIcon(Icons.notifications_outlined),
-                          const SizedBox(width: 8),
-                          _buildHeaderIcon(Icons.dark_mode_outlined),
-                          const SizedBox(width: 8),
-                          _buildHeaderIcon(Icons.menu_rounded),
+                          IconButton(onPressed: (){}, icon: Icon(Icons.notifications_rounded)),
+                          PopupMenuButton(
+                              icon: const Icon(
+                                Icons.more_vert,
+                              ),
+                              onSelected: (Menuoptions value) {
+                                setState(() {
+                                  if (value == Menuoptions.appmode) {
+
+                                  } else if (value == Menuoptions.settings) {
+                                    Navigator.of(context).pushNamed(Pagenavigation.settingscreen);
+                                  } 
+                                });
+                              },
+                              itemBuilder: (_) => [
+                                    PopupMenuItem(
+                                      value: Menuoptions.appmode,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.dark_mode),
+                                          Text('app mode'),
+                                        ],
+                                      )   
+                                    ),
+                                   
+                                      const PopupMenuItem(
+                                      value: Menuoptions.settings,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.settings),
+                                          Text('Settings'),
+                                        ],
+                                      ),
+                                    )
+                                  ]
+                                  ),               
                         ],
                       ),
                     ],
@@ -156,20 +194,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                AnimatedSwitcher(
-                                  duration: const Duration(milliseconds: 300),
-                                  child: Text(
-                                    _isBalanceVisible
-                                        ? '\FCFA${response.data?['user']?['balance']?.toString() ?? '0.00'}' // Dynamic balance from AuthState
-                                        : '••••••',
-                                    key: ValueKey(_isBalanceVisible),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                               AnimatedSwitcher(
+                                duration: const Duration(milliseconds: 300),
+                              child: FittedBox(
+                                key: ValueKey(_isBalanceVisible),
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  _isBalanceVisible
+                                      ? '${response.data?['user']?['balance']?.toString() ?? '0.00'} XfA'
+                                                                  : '••••••',
+                                  style: const TextStyle(
+                                  color: Colors.white,
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
                                 ),
+                                 ),
+                               ),
+                             ),
                               ],
                             ),
                             GestureDetector(
@@ -253,7 +295,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             ),
           ),
-
           // Main Content
           Padding(
             padding: const EdgeInsets.all(24),
@@ -286,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         color: Colors.blue,
                         onTap: () {
                           showPaymentOptions(context);
-                          HapticFeedback.mediumImpact();
+                          HapticFeedback.selectionClick();
                         },
                       ),
                       const SizedBox(height: 16),
@@ -296,8 +337,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         subtitle: 'Transfer to friends & family',
                         color: Colors.green,
                         onTap: () {
-                          HapticFeedback.mediumImpact();
-                          // Navigate to send money
+                          Navigator.of(context).pushNamed(Pagenavigation.sendmoneyscreen);
+                          HapticFeedback.selectionClick();
                         },
                       ),
                     ],

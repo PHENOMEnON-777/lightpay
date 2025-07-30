@@ -1,6 +1,7 @@
 
 
 import 'package:lightpay/data/model/appresponsemodel.dart/appresponse.dart';
+import 'package:lightpay/data/model/transaction/sendmoney/sendmoney.dart';
 import 'package:lightpay/data/model/transaction/transaction.dart';
 import 'package:lightpay/data/provider/server/transactionserverservices.dart';
 
@@ -16,4 +17,12 @@ class TransactionRepository {
   }
 }
 
+Future<AppResponse<Map<String,dynamic>>> sendMoney({required SendMoney sendmoney}) async {
+  try {
+    final response = await transactionServerServices.sendMoney(sendmoney: sendmoney);
+    return response;
+  } catch (e) {
+    rethrow;
+  }
+}
 }

@@ -113,7 +113,7 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
       builder: (context) {
         return AlertDialog(
           title: const Text('NFC Not Available !!!'),
-          content: const Text('NFC technology is not available on this device. Please use QR Code payment instead.'),
+          content: const Text('NFC technology may not be available on this device or its disable in your settings.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),

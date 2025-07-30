@@ -11,96 +11,77 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
-  int _currentIndex = 0;
-  final List<Widget> _pages = [
+  int index = 0;
+  late final PageController _pageController;
+
+  final List<Widget> _pages = const [
     HomeScreen(),
     RechargeScreen(),
-    HistorScreen()
-  ];
-
-  final List<Map<String, dynamic>> _navItems = [
-    {'icon': Icons.home_rounded, 'label': 'Home'},
-    {'icon': Icons.account_balance_wallet_rounded, 'label': 'Recharge'},
-    {'icon': Icons.history, 'label': 'History'},
+    HistorScreen(),
   ];
 
   @override
-  Widget build(BuildContext context) {
-    // final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: index);
+  }
 
-    return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _pages,
-      ),
-      extendBody: true,
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(26),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(100),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _onItemTapped(int newIndex) {
+    setState(() {
+      index = newIndex;
+    });
+    _pageController.animateToPage(
+      newIndex,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (newIndex) {
+            setState(() {
+              index = newIndex;
+            });
+          },
+          children: _pages,
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(25),
-          child: SizedBox(
-            height: screenHeight *0.08,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: _navItems.asMap().entries.map((entry) {
-                int index = entry.key;
-                Map<String, dynamic> item = entry.value;
-                bool isSelected = _currentIndex == index;
-                
-                return Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _currentIndex = index;
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: isSelected 
-                                  ? Colors.blue.withOpacity(0.2) 
-                                  : Colors.transparent,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              item['icon'],
-                              size: 30,
-                              color: isSelected ? Colors.blue : Colors.grey,
-                            ),
-                          ),
-                          Text(
-                            item['label'],
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.w400,
-                              color: isSelected ? Colors.blue : Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
+        extendBody: true,
+        bottomNavigationBar: Container(
+          margin: const EdgeInsets.all(16),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: NavigationBarTheme(
+              data: NavigationBarThemeData(
+                backgroundColor: const Color.fromARGB(255, 16, 40, 58),
+                indicatorColor: Colors.blue.shade100,
+                labelTextStyle: WidgetStateProperty.all(
+                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                ),
+              ),
+              child: NavigationBar(
+                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+                animationDuration: const Duration(milliseconds: 400),
+                elevation: 8,
+                selectedIndex: index,
+                onDestinationSelected: _onItemTapped,
+                destinations: const [
+                  NavigationDestination(icon: Icon(Icons.home_rounded), label: 'Home'),
+                  NavigationDestination(icon: Icon(Icons.account_balance_wallet_rounded), label: 'Recharge'),
+                  NavigationDestination(icon: Icon(Icons.history), label: 'History'),
+                ],
+              ),
             ),
           ),
         ),

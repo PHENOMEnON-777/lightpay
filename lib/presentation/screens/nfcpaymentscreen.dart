@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lightpay/constants/pagenavigation.dart';
 import 'package:lightpay/data/model/transaction/transaction.dart';
@@ -7,9 +6,7 @@ import 'package:lightpay/logic/bloc/transactionbloc/Transaction/Transaction_bloc
 import 'package:lightpay/presentation/widgets/nfcanimationwidget.dart';
 import 'package:lightpay/presentation/widgets/pincodeverification.dart';
 import 'package:lightpay/presentation/widgets/transactionfailedwidget.dart';
-import 'package:lightpay/presentation/widgets/transactionsuccesswidget.dart';
 import 'package:nfc_manager/nfc_manager.dart';
-// Import your new NFC animation widget
 
 class PaymentNFCScreen extends StatefulWidget {
   const PaymentNFCScreen({super.key});
@@ -26,7 +23,7 @@ class _PaymentNFCScreenState extends State<PaymentNFCScreen> {
   @override
   void initState() {
     super.initState();
-    _startNFC();
+    _startNFC(); // Start NFC session when widget is initialized
   }
 
   void _startNFC() async {
@@ -67,16 +64,14 @@ class _PaymentNFCScreenState extends State<PaymentNFCScreen> {
             setState(() {
               _statusMessage = 'PIN verified. Processing transaction...';
             });
-            // this amount here is just for simulation
+            // Simulate transaction
             final transaction = Transaction(amount: 2000);
-
             context.read<TransactionBloc>().add(
-              TransactionEvent.transactionInitiation(transaction: transaction),
-            );
+                  TransactionEvent.transactionInitiation(transaction: transaction),
+                );
           } else {
             setState(() {
-              _statusMessage =
-                  'PIN verification failed. Transaction cancelled.';
+              _statusMessage = 'PIN verification failed. Transaction cancelled.';
               _animationState = NFCAnimationState.error;
             });
             _restartNFC();
@@ -100,23 +95,6 @@ class _PaymentNFCScreenState extends State<PaymentNFCScreen> {
 
   String _extractNfcData(NfcTag tag) {
     Map<String, dynamic> data = {};
-
-    // Extract basic tag information
-    // data['identifier'] = tag.data['identifier']?.toString() ?? 'N/A';
-    // data['techList'] = tag.data['techList']?.toString() ?? 'N/A';
-
-    // Try to extract NDEF data if available
-    // if (tag.data.containsKey('ndef')) {
-    // data['ndef'] = tag.data['ndef'].toString();
-    // }
-
-    // Try to extract other technology-specific data
-    // tag.data.forEach((key, value) {
-    //   if (!data.containsKey(key)) {
-    //     data[key] = value.toString();
-    //   }
-    // });
-
     return data.entries.map((e) => '${e.key}: ${e.value}').join('\n');
   }
 
@@ -184,211 +162,209 @@ class _PaymentNFCScreenState extends State<PaymentNFCScreen> {
       body: SafeArea(
         child: BlocConsumer<TransactionBloc, TransactionState>(
           listener: (context, state) {
-              if(state is PaymentInitiationSuccessfull){
+            if (state is PaymentInitiationSuccessfull) {
+              Navigator.of(context).pushNamed(Pagenavigation.payedsuccessfully,arguments: state.response,);
               context.read<TransactionBloc>().add(TransactionEvent.reset());
-              Navigator.of(context).pushNamed(Pagenavigation.payedsuccessfully,arguments:state.response);
-            _restartNFC();
+              _startNFC(); 
+            } else if (state is PaymentInitiationFailed) {
+              Navigator.of(context).pushNamed(Pagenavigation.paymentFailed,arguments: state.errormessga,);
+              context.read<TransactionBloc>().add(TransactionEvent.reset());
+              _startNFC(); 
             }
           },
           builder: (context, state) {
-           return state.maybeWhen(
+            return state.maybeWhen(
               initial: () {
                 return Column(
-              children: [
-                // Header Section
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 24,
-                    horizontal: 20,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF2196F3),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      const Icon(
-                        Icons.contactless,
-                        size: 48,
-                        color: Colors.white,
+                  children: [
+                    // Header Section
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 24,
+                        horizontal: 20,
                       ),
-                      const SizedBox(height: 12),
-                      Text(
-                        _statusMessage,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF2196F3),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(30),
                         ),
-                        textAlign: TextAlign.center,
                       ),
-                    ],
-                  ),
-                ),
-
-                // Main Content
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // NFC Animation Section - Using the reusable widget
-                        SizedBox(
-                          width: screenWidth * 0.9,
-                          height: screenHeight * 0.35,
-                          child: Center(
-                            child: NFCAnimationController(
-                              state: _animationState,
-                              size: 280,
-                              primaryColor: const Color(0xFF2196F3),
-                              successColor: Colors.green,
-                              errorColor: Colors.red,
-                              onTap: () {
-                                if (_animationState ==
-                                    NFCAnimationState.error) {
-                                  _startNFC();
-                                }
-                              },
-                              onAnimationComplete: () {
-                                // Called when success or error animation completes
-                                if (_animationState ==
-                                    NFCAnimationState.error) {
-                                  _restartNFC();
-                                }
-                              },
-                            ),
+                      child: Column(
+                        children: [
+                          const Icon(
+                            Icons.contactless,
+                            size: 48,
+                            color: Colors.white,
                           ),
-                        ),
-
-                        const SizedBox(height: 30),
-
-                        // Dynamic title and instruction text
-                        Text(
-                          _titleText,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color:
-                                _animationState == NFCAnimationState.success
+                          const SizedBox(height: 12),
+                          Text(
+                            _statusMessage,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Main Content
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // NFC Animation Section
+                            SizedBox(
+                              width: screenWidth * 0.9,
+                              height: screenHeight * 0.35,
+                              child: Center(
+                                child: NFCAnimationController(
+                                  state: _animationState,
+                                  size: 280,
+                                  primaryColor: const Color(0xFF2196F3),
+                                  successColor: Colors.green,
+                                  errorColor: Colors.red,
+                                  onTap: () {
+                                    if (_animationState ==
+                                        NFCAnimationState.error) {
+                                      _startNFC();
+                                    }
+                                  },
+                                  onAnimationComplete: () {
+                                    if (_animationState ==
+                                        NFCAnimationState.error) {
+                                      _restartNFC();
+                                    }
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 30),
+                            // Dynamic title and instruction text
+                            Text(
+                              _titleText,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: _animationState ==
+                                        NFCAnimationState.success
                                     ? Colors.green
                                     : _animationState == NFCAnimationState.error
-                                    ? Colors.red
-                                    : const Color(0xFF333333),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          _instructionText,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Color(0xFF666666),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-
-                        const Spacer(),
-
-                        // Retry button for error state
-                        if (_animationState == NFCAnimationState.error) ...[
-                          ElevatedButton(
-                            onPressed: _startNFC,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2196F3),
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 32,
-                                vertical: 12,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
+                                        ? Colors.red
+                                        : const Color(0xFF333333),
                               ),
                             ),
-                            child: const Text('Retry'),
-                          ),
-                          const SizedBox(height: 20),
-                        ],
-
-                        // NFC Data Display Section
-                        if (_nfcData.isNotEmpty) ...[
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: Colors.grey.shade300),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 2),
+                            const SizedBox(height: 8),
+                            Text(
+                              _instructionText,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Color(0xFF666666),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const Spacer(),
+                            // Retry button for error state
+                            if (_animationState == NFCAnimationState.error) ...[
+                              ElevatedButton(
+                                onPressed: _startNFC,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF2196F3),
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 32,
+                                    vertical: 12,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
                                 ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.info_outline,
-                                      color: Colors.grey.shade600,
-                                      size: 20,
+                                child: const Text('Retry'),
+                              ),
+                              const SizedBox(height: 20),
+                            ],
+                            // NFC Data Display Section
+                            if (_nfcData.isNotEmpty) ...[
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border:
+                                      Border.all(color: Colors.grey.shade300),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.1),
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 2),
                                     ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      'NFC Data Received',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.grey.shade800,
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.info_outline,
+                                          color: Colors.grey.shade600,
+                                          size: 20,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          'NFC Data Received',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.grey.shade800,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 12),
+                                    Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.all(12),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade50,
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        _nfcData,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: 'monospace',
+                                          color: Colors.grey.shade700,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 12),
-                                Container(
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.shade50,
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(
-                                      color: Colors.grey.shade200,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    _nfcData,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: 'monospace',
-                                      color: Colors.grey.shade700,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                        ],
-                      ],
+                              ),
+                              const SizedBox(height: 20),
+                            ],
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            );
+                  ],
+                );
               },
-              // paymentinitiationSuccessfull: (response) => TransactionSuccessWidget(responseData: response, onRestartfunc: _restartNFC),
-              paymentinitiationFailed: (errormessga) => TransactionFailedWidget(errorMessage: errormessga, onRestartfunc: _restartNFC),
-              orElse: ()=>Center(child: CircularProgressIndicator(strokeWidth: 2,),));
-            
-         
-            
+              paymentinitiationFailed: (errormessga) =>
+                  TransactionFailedWidget(errorMessage: errormessga),
+              orElse: () => const Center(
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            );
           },
         ),
       ),

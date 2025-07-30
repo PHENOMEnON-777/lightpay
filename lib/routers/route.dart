@@ -10,8 +10,12 @@ import 'package:lightpay/constants/pagenavigation.dart';
 import 'package:lightpay/data/model/appresponsemodel.dart/appresponse.dart';
 import 'package:lightpay/presentation/screens/loginscreen.dart';
 import 'package:lightpay/presentation/screens/nfcpaymentscreen.dart';
+import 'package:lightpay/presentation/screens/profilescreen.dart';
 import 'package:lightpay/presentation/screens/qrcodepaymentscreen.dart';
+import 'package:lightpay/presentation/screens/sendmoneyscreen.dart';
+import 'package:lightpay/presentation/screens/setttingsscreen.dart';
 import 'package:lightpay/presentation/screens/tabscreen.dart';
+import 'package:lightpay/presentation/widgets/transactionfailedwidget.dart';
 import 'package:lightpay/presentation/widgets/transactionsuccesswidget.dart';
 
 class AppRoute {
@@ -28,6 +32,15 @@ class AppRoute {
       case Pagenavigation.payedsuccessfully:
       final response = settings.arguments as AppResponse<Map<String,dynamic>>;
       return MaterialPageRoute(builder: (context)=> TransactionSuccessWidget(responseData: response,));
+      case Pagenavigation.paymentFailed:
+      final errormessage = settings.arguments as String;
+      return MaterialPageRoute(builder: (context)=> TransactionFailedWidget(errorMessage: errormessage,));
+      case Pagenavigation.sendmoneyscreen:
+      return MaterialPageRoute(builder: (context)=> SendMoneyScreen());
+      case Pagenavigation.settingscreen:
+      return MaterialPageRoute(builder: (context)=> SettingsScreen());
+      case Pagenavigation.profilescreen:
+      return MaterialPageRoute(builder: (context)=> ProfileScreen());
        default:
       return  MaterialPageRoute(
             builder: ((context) => Scaffold(
