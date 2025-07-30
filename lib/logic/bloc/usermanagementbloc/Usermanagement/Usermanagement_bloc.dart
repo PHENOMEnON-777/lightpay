@@ -12,6 +12,7 @@ part 'Usermanagement_bloc.freezed.dart';
 class UsermanagementBloc extends Bloc<UsermanagementEvent,UsermanagementState>{
   final UserManagementRepository userManagementRepository;
   UsermanagementBloc({required this.userManagementRepository}) : super(const UsermanagementState.initial()){
+
     on<UpdateUserProfile>((event, emit) async{
      emit(UsermanagementState.loadingtoupdateuserprofile());
      try {
@@ -22,14 +23,16 @@ class UsermanagementBloc extends Bloc<UsermanagementEvent,UsermanagementState>{
      }
     });
 
-    on<GetUserById>((event, emit)async {
-      emit(UsermanagementState.loadingtogetuserbyid());
-      try {
-        final response = await userManagementRepository.getuserbyid(userid: event.userid);
-        emit(UsermanagementState.getuserbyidsuccessfully(response: response));
-      } catch (e) {
-        emit(UsermanagementState.getuserbyidFailed(errormessage: e.toString()));
-      }
-    });
+    // on<GetUserById>((event, emit)async {
+    //   emit(UsermanagementState.loadingtogetuserbyid());
+    //   try {
+    //     final response = await userManagementRepository.getuserbyid(userid: event.userid);
+    //     emit(UsermanagementState.getuserbyidsuccessfully(response: response));
+    //   } catch (e) {
+    //     emit(UsermanagementState.getuserbyidFailed(errormessage: e.toString()));
+    //   }
+    // });
+
+
   }
 }

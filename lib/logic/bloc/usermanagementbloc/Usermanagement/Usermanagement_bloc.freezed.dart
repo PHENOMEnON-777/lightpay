@@ -570,30 +570,70 @@ as String,
 /// @nodoc
 mixin _$UsermanagementEvent {
 
-
+ UpdateProfile get updateprofile;
+/// Create a copy of UsermanagementEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UsermanagementEventCopyWith<UsermanagementEvent> get copyWith => _$UsermanagementEventCopyWithImpl<UsermanagementEvent>(this as UsermanagementEvent, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UsermanagementEvent);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UsermanagementEvent&&(identical(other.updateprofile, updateprofile) || other.updateprofile == updateprofile));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,updateprofile);
 
 @override
 String toString() {
-  return 'UsermanagementEvent()';
+  return 'UsermanagementEvent(updateprofile: $updateprofile)';
 }
 
 
 }
 
 /// @nodoc
-class $UsermanagementEventCopyWith<$Res>  {
-$UsermanagementEventCopyWith(UsermanagementEvent _, $Res Function(UsermanagementEvent) __);
+abstract mixin class $UsermanagementEventCopyWith<$Res>  {
+  factory $UsermanagementEventCopyWith(UsermanagementEvent value, $Res Function(UsermanagementEvent) _then) = _$UsermanagementEventCopyWithImpl;
+@useResult
+$Res call({
+ UpdateProfile updateprofile
+});
+
+
+$UpdateProfileCopyWith<$Res> get updateprofile;
+
+}
+/// @nodoc
+class _$UsermanagementEventCopyWithImpl<$Res>
+    implements $UsermanagementEventCopyWith<$Res> {
+  _$UsermanagementEventCopyWithImpl(this._self, this._then);
+
+  final UsermanagementEvent _self;
+  final $Res Function(UsermanagementEvent) _then;
+
+/// Create a copy of UsermanagementEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? updateprofile = null,}) {
+  return _then(_self.copyWith(
+updateprofile: null == updateprofile ? _self.updateprofile : updateprofile // ignore: cast_nullable_to_non_nullable
+as UpdateProfile,
+  ));
+}
+/// Create a copy of UsermanagementEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UpdateProfileCopyWith<$Res> get updateprofile {
+  
+  return $UpdateProfileCopyWith<$Res>(_self.updateprofile, (value) {
+    return _then(_self.copyWith(updateprofile: value));
+  });
+}
 }
 
 
@@ -611,12 +651,11 @@ extension UsermanagementEventPatterns on UsermanagementEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( UpdateUserProfile value)?  updateprofile,TResult Function( GetUserById value)?  getuserbuId,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( UpdateUserProfile value)?  updateprofile,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case UpdateUserProfile() when updateprofile != null:
-return updateprofile(_that);case GetUserById() when getuserbuId != null:
-return getuserbuId(_that);case _:
+return updateprofile(_that);case _:
   return orElse();
 
 }
@@ -634,12 +673,11 @@ return getuserbuId(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( UpdateUserProfile value)  updateprofile,required TResult Function( GetUserById value)  getuserbuId,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( UpdateUserProfile value)  updateprofile,}){
 final _that = this;
 switch (_that) {
 case UpdateUserProfile():
-return updateprofile(_that);case GetUserById():
-return getuserbuId(_that);}
+return updateprofile(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -653,12 +691,11 @@ return getuserbuId(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( UpdateUserProfile value)?  updateprofile,TResult? Function( GetUserById value)?  getuserbuId,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( UpdateUserProfile value)?  updateprofile,}){
 final _that = this;
 switch (_that) {
 case UpdateUserProfile() when updateprofile != null:
-return updateprofile(_that);case GetUserById() when getuserbuId != null:
-return getuserbuId(_that);case _:
+return updateprofile(_that);case _:
   return null;
 
 }
@@ -675,11 +712,10 @@ return getuserbuId(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( UpdateProfile updateprofile)?  updateprofile,TResult Function( UserId userid)?  getuserbuId,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( UpdateProfile updateprofile)?  updateprofile,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case UpdateUserProfile() when updateprofile != null:
-return updateprofile(_that.updateprofile);case GetUserById() when getuserbuId != null:
-return getuserbuId(_that.userid);case _:
+return updateprofile(_that.updateprofile);case _:
   return orElse();
 
 }
@@ -697,11 +733,10 @@ return getuserbuId(_that.userid);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( UpdateProfile updateprofile)  updateprofile,required TResult Function( UserId userid)  getuserbuId,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( UpdateProfile updateprofile)  updateprofile,}) {final _that = this;
 switch (_that) {
 case UpdateUserProfile():
-return updateprofile(_that.updateprofile);case GetUserById():
-return getuserbuId(_that.userid);}
+return updateprofile(_that.updateprofile);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -715,11 +750,10 @@ return getuserbuId(_that.userid);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( UpdateProfile updateprofile)?  updateprofile,TResult? Function( UserId userid)?  getuserbuId,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( UpdateProfile updateprofile)?  updateprofile,}) {final _that = this;
 switch (_that) {
 case UpdateUserProfile() when updateprofile != null:
-return updateprofile(_that.updateprofile);case GetUserById() when getuserbuId != null:
-return getuserbuId(_that.userid);case _:
+return updateprofile(_that.updateprofile);case _:
   return null;
 
 }
@@ -734,11 +768,11 @@ class UpdateUserProfile implements UsermanagementEvent {
   const UpdateUserProfile({required this.updateprofile});
   
 
- final  UpdateProfile updateprofile;
+@override final  UpdateProfile updateprofile;
 
 /// Create a copy of UsermanagementEvent
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $UpdateUserProfileCopyWith<UpdateUserProfile> get copyWith => _$UpdateUserProfileCopyWithImpl<UpdateUserProfile>(this, _$identity);
 
@@ -764,13 +798,13 @@ String toString() {
 /// @nodoc
 abstract mixin class $UpdateUserProfileCopyWith<$Res> implements $UsermanagementEventCopyWith<$Res> {
   factory $UpdateUserProfileCopyWith(UpdateUserProfile value, $Res Function(UpdateUserProfile) _then) = _$UpdateUserProfileCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
  UpdateProfile updateprofile
 });
 
 
-$UpdateProfileCopyWith<$Res> get updateprofile;
+@override $UpdateProfileCopyWith<$Res> get updateprofile;
 
 }
 /// @nodoc
@@ -783,7 +817,7 @@ class _$UpdateUserProfileCopyWithImpl<$Res>
 
 /// Create a copy of UsermanagementEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? updateprofile = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? updateprofile = null,}) {
   return _then(UpdateUserProfile(
 updateprofile: null == updateprofile ? _self.updateprofile : updateprofile // ignore: cast_nullable_to_non_nullable
 as UpdateProfile,
@@ -798,81 +832,6 @@ $UpdateProfileCopyWith<$Res> get updateprofile {
   
   return $UpdateProfileCopyWith<$Res>(_self.updateprofile, (value) {
     return _then(_self.copyWith(updateprofile: value));
-  });
-}
-}
-
-/// @nodoc
-
-
-class GetUserById implements UsermanagementEvent {
-  const GetUserById({required this.userid});
-  
-
- final  UserId userid;
-
-/// Create a copy of UsermanagementEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$GetUserByIdCopyWith<GetUserById> get copyWith => _$GetUserByIdCopyWithImpl<GetUserById>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetUserById&&(identical(other.userid, userid) || other.userid == userid));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,userid);
-
-@override
-String toString() {
-  return 'UsermanagementEvent.getuserbuId(userid: $userid)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $GetUserByIdCopyWith<$Res> implements $UsermanagementEventCopyWith<$Res> {
-  factory $GetUserByIdCopyWith(GetUserById value, $Res Function(GetUserById) _then) = _$GetUserByIdCopyWithImpl;
-@useResult
-$Res call({
- UserId userid
-});
-
-
-$UserIdCopyWith<$Res> get userid;
-
-}
-/// @nodoc
-class _$GetUserByIdCopyWithImpl<$Res>
-    implements $GetUserByIdCopyWith<$Res> {
-  _$GetUserByIdCopyWithImpl(this._self, this._then);
-
-  final GetUserById _self;
-  final $Res Function(GetUserById) _then;
-
-/// Create a copy of UsermanagementEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? userid = null,}) {
-  return _then(GetUserById(
-userid: null == userid ? _self.userid : userid // ignore: cast_nullable_to_non_nullable
-as UserId,
-  ));
-}
-
-/// Create a copy of UsermanagementEvent
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$UserIdCopyWith<$Res> get userid {
-  
-  return $UserIdCopyWith<$Res>(_self.userid, (value) {
-    return _then(_self.copyWith(userid: value));
   });
 }
 }

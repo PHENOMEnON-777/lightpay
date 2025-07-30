@@ -11,4 +11,8 @@ class AuthState with _$AuthState {
   const factory AuthState.loadinglogin() = LoadingLogin;
   const factory AuthState.loginSuccess({ required AppResponse<Map<String,dynamic>> response,}) = LoginSuccess;
   const factory AuthState.loginFailure({required String message}) = LoginFailure;
+
+  const factory AuthState.loadingwithtoken() = LoadingToGetUserWithToken;
+  const factory AuthState.loginwithtokensuccessfully({required AppResponse<Map<String,dynamic>> response}) = LoginWithTokenSuccessfully;
+  const factory AuthState.loginwithtokenFailed({required String errormessage}) = LoginWithTokenFailed;
 }   

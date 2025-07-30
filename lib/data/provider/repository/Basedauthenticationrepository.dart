@@ -33,4 +33,12 @@ Future<AppResponse<Map<String,dynamic>>> loginUser({required User user}) async {
     rethrow;
   }
 }
+Future<AppResponse<Map<String,dynamic>>> loginwithtoken() async {
+  try {
+    final response = await authenticationServerservice.loginwithtoken();
+    return response;
+  } catch (e) {
+    rethrow;
+  }
+}
 }

@@ -4,14 +4,17 @@ import 'package:lightpay/data/provider/repository/Basedauthenticationrepository.
 import 'package:lightpay/data/provider/repository/historyRepository.dart';
 import 'package:lightpay/data/provider/repository/rechargerepository.dart';
 import 'package:lightpay/data/provider/repository/transactionrepository.dart';
+import 'package:lightpay/data/provider/repository/usermanagementrepository.dart';
 import 'package:lightpay/data/provider/server/authenticationRepository.dart';
 import 'package:lightpay/data/provider/server/historyserverservice.dart';
 import 'package:lightpay/data/provider/server/rechargeserverservice.dart';
 import 'package:lightpay/data/provider/server/transactionserverservices.dart';
+import 'package:lightpay/data/provider/server/usermanagerserverservice.dart';
 import 'package:lightpay/logic/bloc/authbloc/Auth/Auth_bloc.dart';
 import 'package:lightpay/logic/bloc/historybloc/History/History_bloc.dart';
 import 'package:lightpay/logic/bloc/rechargebloc/Recharge/Recharge_bloc.dart';
 import 'package:lightpay/logic/bloc/transactionbloc/Transaction/Transaction_bloc.dart';
+import 'package:lightpay/logic/bloc/usermanagementbloc/Usermanagement/Usermanagement_bloc.dart';
 import 'package:lightpay/presentation/screens/loginscreen.dart';
 import 'package:lightpay/routers/route.dart';
 // import 'package:lightpay/routers/route.dart';
@@ -41,7 +44,8 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(create: (context) => AuthenticationRepository(authenticationServerservice: AuthenticationServerservice()), ),
            RepositoryProvider(create: (context)=> TransactionRepository(transactionServerServices: TransactionServerServices())),
            RepositoryProvider(create: (context) => RechargeRepository(rechargeServerService: RechargeServerService()),),
-           RepositoryProvider(create: (context)=>HistoryRepository(historyServerService: HistoryServerService()))
+           RepositoryProvider(create: (context)=>HistoryRepository(historyServerService: HistoryServerService())),
+           RepositoryProvider(create: (context)=>UserManagementRepository(userManagerServerService: UserManagerServerService()))
       ],
       child: MultiBlocProvider(
         providers: [
@@ -49,6 +53,7 @@ class MyApp extends StatelessWidget {
        BlocProvider(create: (context)=>TransactionBloc(transactionrepository: TransactionRepository(transactionServerServices: TransactionServerServices()))),
        BlocProvider(create: (context)=>RechargeBloc(rechargeRepository: RechargeRepository(rechargeServerService: RechargeServerService()))),
        BlocProvider(create: (context)=>HistoryBloc(historyRepository: HistoryRepository(historyServerService: HistoryServerService()))),
+       BlocProvider(create: (context)=>UsermanagementBloc(userManagementRepository: UserManagementRepository(userManagerServerService: UserManagerServerService())))
           // BlocProvider(create: (context) => InternetBloc()),
           // BlocProvider(create: (context) => ThemeBloc(isLightMode: islightmode)),
         ],
