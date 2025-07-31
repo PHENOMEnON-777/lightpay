@@ -55,7 +55,7 @@ extension UsermanagementStatePatterns on UsermanagementState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( LoadingToGetUserById value)?  loadingtogetuserbyid,TResult Function( GetUserByIdSuccessfully value)?  getuserbyidsuccessfully,TResult Function( GetUserByIdFailed value)?  getuserbyidFailed,TResult Function( LoadingToUpdateUserProfile value)?  loadingtoupdateuserprofile,TResult Function( UpdatingUserProfileSuccessfully value)?  updatinguserprofilesuccessfully,TResult Function( UpdatingUserProfileFailed value)?  updatinguserprofileFailed,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( LoadingToGetUserById value)?  loadingtogetuserbyid,TResult Function( GetUserByIdSuccessfully value)?  getuserbyidsuccessfully,TResult Function( GetUserByIdFailed value)?  getuserbyidFailed,TResult Function( LoadingToUpdateUserProfile value)?  loadingtoupdateuserprofile,TResult Function( UpdatingUserProfileSuccessfully value)?  updatinguserprofilesuccessfully,TResult Function( UpdatingUserProfileFailed value)?  updatinguserprofileFailed,TResult Function( LoadingToUpdateUserPassword value)?  loadingtoupdateuserpassword,TResult Function( UpdatingUserPasswordSuccessfully value)?  updatinguserpasswordsuccessfully,TResult Function( UpdatingUserPasswordFailed value)?  updatinguserpasswordFailed,TResult Function( LoadingToUpdateUserPincode value)?  loadingtoupdateuserpincode,TResult Function( UpdatingUserPincodeSuccessfully value)?  updatinguserpincodesuccessfully,TResult Function( UpdatingUserPincodeFailed value)?  updatinguserpincodeFailed,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
@@ -65,7 +65,13 @@ return getuserbyidsuccessfully(_that);case GetUserByIdFailed() when getuserbyidF
 return getuserbyidFailed(_that);case LoadingToUpdateUserProfile() when loadingtoupdateuserprofile != null:
 return loadingtoupdateuserprofile(_that);case UpdatingUserProfileSuccessfully() when updatinguserprofilesuccessfully != null:
 return updatinguserprofilesuccessfully(_that);case UpdatingUserProfileFailed() when updatinguserprofileFailed != null:
-return updatinguserprofileFailed(_that);case _:
+return updatinguserprofileFailed(_that);case LoadingToUpdateUserPassword() when loadingtoupdateuserpassword != null:
+return loadingtoupdateuserpassword(_that);case UpdatingUserPasswordSuccessfully() when updatinguserpasswordsuccessfully != null:
+return updatinguserpasswordsuccessfully(_that);case UpdatingUserPasswordFailed() when updatinguserpasswordFailed != null:
+return updatinguserpasswordFailed(_that);case LoadingToUpdateUserPincode() when loadingtoupdateuserpincode != null:
+return loadingtoupdateuserpincode(_that);case UpdatingUserPincodeSuccessfully() when updatinguserpincodesuccessfully != null:
+return updatinguserpincodesuccessfully(_that);case UpdatingUserPincodeFailed() when updatinguserpincodeFailed != null:
+return updatinguserpincodeFailed(_that);case _:
   return orElse();
 
 }
@@ -83,7 +89,7 @@ return updatinguserprofileFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( LoadingToGetUserById value)  loadingtogetuserbyid,required TResult Function( GetUserByIdSuccessfully value)  getuserbyidsuccessfully,required TResult Function( GetUserByIdFailed value)  getuserbyidFailed,required TResult Function( LoadingToUpdateUserProfile value)  loadingtoupdateuserprofile,required TResult Function( UpdatingUserProfileSuccessfully value)  updatinguserprofilesuccessfully,required TResult Function( UpdatingUserProfileFailed value)  updatinguserprofileFailed,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( LoadingToGetUserById value)  loadingtogetuserbyid,required TResult Function( GetUserByIdSuccessfully value)  getuserbyidsuccessfully,required TResult Function( GetUserByIdFailed value)  getuserbyidFailed,required TResult Function( LoadingToUpdateUserProfile value)  loadingtoupdateuserprofile,required TResult Function( UpdatingUserProfileSuccessfully value)  updatinguserprofilesuccessfully,required TResult Function( UpdatingUserProfileFailed value)  updatinguserprofileFailed,required TResult Function( LoadingToUpdateUserPassword value)  loadingtoupdateuserpassword,required TResult Function( UpdatingUserPasswordSuccessfully value)  updatinguserpasswordsuccessfully,required TResult Function( UpdatingUserPasswordFailed value)  updatinguserpasswordFailed,required TResult Function( LoadingToUpdateUserPincode value)  loadingtoupdateuserpincode,required TResult Function( UpdatingUserPincodeSuccessfully value)  updatinguserpincodesuccessfully,required TResult Function( UpdatingUserPincodeFailed value)  updatinguserpincodeFailed,}){
 final _that = this;
 switch (_that) {
 case _Initial():
@@ -93,7 +99,13 @@ return getuserbyidsuccessfully(_that);case GetUserByIdFailed():
 return getuserbyidFailed(_that);case LoadingToUpdateUserProfile():
 return loadingtoupdateuserprofile(_that);case UpdatingUserProfileSuccessfully():
 return updatinguserprofilesuccessfully(_that);case UpdatingUserProfileFailed():
-return updatinguserprofileFailed(_that);case _:
+return updatinguserprofileFailed(_that);case LoadingToUpdateUserPassword():
+return loadingtoupdateuserpassword(_that);case UpdatingUserPasswordSuccessfully():
+return updatinguserpasswordsuccessfully(_that);case UpdatingUserPasswordFailed():
+return updatinguserpasswordFailed(_that);case LoadingToUpdateUserPincode():
+return loadingtoupdateuserpincode(_that);case UpdatingUserPincodeSuccessfully():
+return updatinguserpincodesuccessfully(_that);case UpdatingUserPincodeFailed():
+return updatinguserpincodeFailed(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -110,7 +122,7 @@ return updatinguserprofileFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( LoadingToGetUserById value)?  loadingtogetuserbyid,TResult? Function( GetUserByIdSuccessfully value)?  getuserbyidsuccessfully,TResult? Function( GetUserByIdFailed value)?  getuserbyidFailed,TResult? Function( LoadingToUpdateUserProfile value)?  loadingtoupdateuserprofile,TResult? Function( UpdatingUserProfileSuccessfully value)?  updatinguserprofilesuccessfully,TResult? Function( UpdatingUserProfileFailed value)?  updatinguserprofileFailed,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( LoadingToGetUserById value)?  loadingtogetuserbyid,TResult? Function( GetUserByIdSuccessfully value)?  getuserbyidsuccessfully,TResult? Function( GetUserByIdFailed value)?  getuserbyidFailed,TResult? Function( LoadingToUpdateUserProfile value)?  loadingtoupdateuserprofile,TResult? Function( UpdatingUserProfileSuccessfully value)?  updatinguserprofilesuccessfully,TResult? Function( UpdatingUserProfileFailed value)?  updatinguserprofileFailed,TResult? Function( LoadingToUpdateUserPassword value)?  loadingtoupdateuserpassword,TResult? Function( UpdatingUserPasswordSuccessfully value)?  updatinguserpasswordsuccessfully,TResult? Function( UpdatingUserPasswordFailed value)?  updatinguserpasswordFailed,TResult? Function( LoadingToUpdateUserPincode value)?  loadingtoupdateuserpincode,TResult? Function( UpdatingUserPincodeSuccessfully value)?  updatinguserpincodesuccessfully,TResult? Function( UpdatingUserPincodeFailed value)?  updatinguserpincodeFailed,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
@@ -120,7 +132,13 @@ return getuserbyidsuccessfully(_that);case GetUserByIdFailed() when getuserbyidF
 return getuserbyidFailed(_that);case LoadingToUpdateUserProfile() when loadingtoupdateuserprofile != null:
 return loadingtoupdateuserprofile(_that);case UpdatingUserProfileSuccessfully() when updatinguserprofilesuccessfully != null:
 return updatinguserprofilesuccessfully(_that);case UpdatingUserProfileFailed() when updatinguserprofileFailed != null:
-return updatinguserprofileFailed(_that);case _:
+return updatinguserprofileFailed(_that);case LoadingToUpdateUserPassword() when loadingtoupdateuserpassword != null:
+return loadingtoupdateuserpassword(_that);case UpdatingUserPasswordSuccessfully() when updatinguserpasswordsuccessfully != null:
+return updatinguserpasswordsuccessfully(_that);case UpdatingUserPasswordFailed() when updatinguserpasswordFailed != null:
+return updatinguserpasswordFailed(_that);case LoadingToUpdateUserPincode() when loadingtoupdateuserpincode != null:
+return loadingtoupdateuserpincode(_that);case UpdatingUserPincodeSuccessfully() when updatinguserpincodesuccessfully != null:
+return updatinguserpincodesuccessfully(_that);case UpdatingUserPincodeFailed() when updatinguserpincodeFailed != null:
+return updatinguserpincodeFailed(_that);case _:
   return null;
 
 }
@@ -137,7 +155,7 @@ return updatinguserprofileFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loadingtogetuserbyid,TResult Function( AppResponse<Map<String, dynamic>> response)?  getuserbyidsuccessfully,TResult Function( String errormessage)?  getuserbyidFailed,TResult Function()?  loadingtoupdateuserprofile,TResult Function( AppResponse<Map<String, dynamic>> response)?  updatinguserprofilesuccessfully,TResult Function( String errormessage)?  updatinguserprofileFailed,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loadingtogetuserbyid,TResult Function( AppResponse<Map<String, dynamic>> response)?  getuserbyidsuccessfully,TResult Function( String errormessage)?  getuserbyidFailed,TResult Function()?  loadingtoupdateuserprofile,TResult Function( AppResponse<Map<String, dynamic>> response)?  updatinguserprofilesuccessfully,TResult Function( String errormessage)?  updatinguserprofileFailed,TResult Function()?  loadingtoupdateuserpassword,TResult Function( AppResponse<Map<String, dynamic>> response)?  updatinguserpasswordsuccessfully,TResult Function( String errormessage)?  updatinguserpasswordFailed,TResult Function()?  loadingtoupdateuserpincode,TResult Function( AppResponse<Map<String, dynamic>> response)?  updatinguserpincodesuccessfully,TResult Function( String errormessage)?  updatinguserpincodeFailed,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case LoadingToGetUserById() when loadingtogetuserbyid != null:
@@ -146,7 +164,13 @@ return getuserbyidsuccessfully(_that.response);case GetUserByIdFailed() when get
 return getuserbyidFailed(_that.errormessage);case LoadingToUpdateUserProfile() when loadingtoupdateuserprofile != null:
 return loadingtoupdateuserprofile();case UpdatingUserProfileSuccessfully() when updatinguserprofilesuccessfully != null:
 return updatinguserprofilesuccessfully(_that.response);case UpdatingUserProfileFailed() when updatinguserprofileFailed != null:
-return updatinguserprofileFailed(_that.errormessage);case _:
+return updatinguserprofileFailed(_that.errormessage);case LoadingToUpdateUserPassword() when loadingtoupdateuserpassword != null:
+return loadingtoupdateuserpassword();case UpdatingUserPasswordSuccessfully() when updatinguserpasswordsuccessfully != null:
+return updatinguserpasswordsuccessfully(_that.response);case UpdatingUserPasswordFailed() when updatinguserpasswordFailed != null:
+return updatinguserpasswordFailed(_that.errormessage);case LoadingToUpdateUserPincode() when loadingtoupdateuserpincode != null:
+return loadingtoupdateuserpincode();case UpdatingUserPincodeSuccessfully() when updatinguserpincodesuccessfully != null:
+return updatinguserpincodesuccessfully(_that.response);case UpdatingUserPincodeFailed() when updatinguserpincodeFailed != null:
+return updatinguserpincodeFailed(_that.errormessage);case _:
   return orElse();
 
 }
@@ -164,7 +188,7 @@ return updatinguserprofileFailed(_that.errormessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loadingtogetuserbyid,required TResult Function( AppResponse<Map<String, dynamic>> response)  getuserbyidsuccessfully,required TResult Function( String errormessage)  getuserbyidFailed,required TResult Function()  loadingtoupdateuserprofile,required TResult Function( AppResponse<Map<String, dynamic>> response)  updatinguserprofilesuccessfully,required TResult Function( String errormessage)  updatinguserprofileFailed,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loadingtogetuserbyid,required TResult Function( AppResponse<Map<String, dynamic>> response)  getuserbyidsuccessfully,required TResult Function( String errormessage)  getuserbyidFailed,required TResult Function()  loadingtoupdateuserprofile,required TResult Function( AppResponse<Map<String, dynamic>> response)  updatinguserprofilesuccessfully,required TResult Function( String errormessage)  updatinguserprofileFailed,required TResult Function()  loadingtoupdateuserpassword,required TResult Function( AppResponse<Map<String, dynamic>> response)  updatinguserpasswordsuccessfully,required TResult Function( String errormessage)  updatinguserpasswordFailed,required TResult Function()  loadingtoupdateuserpincode,required TResult Function( AppResponse<Map<String, dynamic>> response)  updatinguserpincodesuccessfully,required TResult Function( String errormessage)  updatinguserpincodeFailed,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case LoadingToGetUserById():
@@ -173,7 +197,13 @@ return getuserbyidsuccessfully(_that.response);case GetUserByIdFailed():
 return getuserbyidFailed(_that.errormessage);case LoadingToUpdateUserProfile():
 return loadingtoupdateuserprofile();case UpdatingUserProfileSuccessfully():
 return updatinguserprofilesuccessfully(_that.response);case UpdatingUserProfileFailed():
-return updatinguserprofileFailed(_that.errormessage);case _:
+return updatinguserprofileFailed(_that.errormessage);case LoadingToUpdateUserPassword():
+return loadingtoupdateuserpassword();case UpdatingUserPasswordSuccessfully():
+return updatinguserpasswordsuccessfully(_that.response);case UpdatingUserPasswordFailed():
+return updatinguserpasswordFailed(_that.errormessage);case LoadingToUpdateUserPincode():
+return loadingtoupdateuserpincode();case UpdatingUserPincodeSuccessfully():
+return updatinguserpincodesuccessfully(_that.response);case UpdatingUserPincodeFailed():
+return updatinguserpincodeFailed(_that.errormessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -190,7 +220,7 @@ return updatinguserprofileFailed(_that.errormessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loadingtogetuserbyid,TResult? Function( AppResponse<Map<String, dynamic>> response)?  getuserbyidsuccessfully,TResult? Function( String errormessage)?  getuserbyidFailed,TResult? Function()?  loadingtoupdateuserprofile,TResult? Function( AppResponse<Map<String, dynamic>> response)?  updatinguserprofilesuccessfully,TResult? Function( String errormessage)?  updatinguserprofileFailed,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loadingtogetuserbyid,TResult? Function( AppResponse<Map<String, dynamic>> response)?  getuserbyidsuccessfully,TResult? Function( String errormessage)?  getuserbyidFailed,TResult? Function()?  loadingtoupdateuserprofile,TResult? Function( AppResponse<Map<String, dynamic>> response)?  updatinguserprofilesuccessfully,TResult? Function( String errormessage)?  updatinguserprofileFailed,TResult? Function()?  loadingtoupdateuserpassword,TResult? Function( AppResponse<Map<String, dynamic>> response)?  updatinguserpasswordsuccessfully,TResult? Function( String errormessage)?  updatinguserpasswordFailed,TResult? Function()?  loadingtoupdateuserpincode,TResult? Function( AppResponse<Map<String, dynamic>> response)?  updatinguserpincodesuccessfully,TResult? Function( String errormessage)?  updatinguserpincodeFailed,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case LoadingToGetUserById() when loadingtogetuserbyid != null:
@@ -199,7 +229,13 @@ return getuserbyidsuccessfully(_that.response);case GetUserByIdFailed() when get
 return getuserbyidFailed(_that.errormessage);case LoadingToUpdateUserProfile() when loadingtoupdateuserprofile != null:
 return loadingtoupdateuserprofile();case UpdatingUserProfileSuccessfully() when updatinguserprofilesuccessfully != null:
 return updatinguserprofilesuccessfully(_that.response);case UpdatingUserProfileFailed() when updatinguserprofileFailed != null:
-return updatinguserprofileFailed(_that.errormessage);case _:
+return updatinguserprofileFailed(_that.errormessage);case LoadingToUpdateUserPassword() when loadingtoupdateuserpassword != null:
+return loadingtoupdateuserpassword();case UpdatingUserPasswordSuccessfully() when updatinguserpasswordsuccessfully != null:
+return updatinguserpasswordsuccessfully(_that.response);case UpdatingUserPasswordFailed() when updatinguserpasswordFailed != null:
+return updatinguserpasswordFailed(_that.errormessage);case LoadingToUpdateUserPincode() when loadingtoupdateuserpincode != null:
+return loadingtoupdateuserpincode();case UpdatingUserPincodeSuccessfully() when updatinguserpincodesuccessfully != null:
+return updatinguserpincodesuccessfully(_that.response);case UpdatingUserPincodeFailed() when updatinguserpincodeFailed != null:
+return updatinguserpincodeFailed(_that.errormessage);case _:
   return null;
 
 }
@@ -568,72 +604,360 @@ as String,
 }
 
 /// @nodoc
-mixin _$UsermanagementEvent {
 
- UpdateProfile get updateprofile;
-/// Create a copy of UsermanagementEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$UsermanagementEventCopyWith<UsermanagementEvent> get copyWith => _$UsermanagementEventCopyWithImpl<UsermanagementEvent>(this as UsermanagementEvent, _$identity);
+
+class LoadingToUpdateUserPassword implements UsermanagementState {
+  const LoadingToUpdateUserPassword();
+  
+
+
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UsermanagementEvent&&(identical(other.updateprofile, updateprofile) || other.updateprofile == updateprofile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadingToUpdateUserPassword);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,updateprofile);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'UsermanagementEvent(updateprofile: $updateprofile)';
+  return 'UsermanagementState.loadingtoupdateuserpassword()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class UpdatingUserPasswordSuccessfully implements UsermanagementState {
+  const UpdatingUserPasswordSuccessfully({required this.response});
+  
+
+ final  AppResponse<Map<String, dynamic>> response;
+
+/// Create a copy of UsermanagementState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdatingUserPasswordSuccessfullyCopyWith<UpdatingUserPasswordSuccessfully> get copyWith => _$UpdatingUserPasswordSuccessfullyCopyWithImpl<UpdatingUserPasswordSuccessfully>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdatingUserPasswordSuccessfully&&(identical(other.response, response) || other.response == response));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,response);
+
+@override
+String toString() {
+  return 'UsermanagementState.updatinguserpasswordsuccessfully(response: $response)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $UsermanagementEventCopyWith<$Res>  {
-  factory $UsermanagementEventCopyWith(UsermanagementEvent value, $Res Function(UsermanagementEvent) _then) = _$UsermanagementEventCopyWithImpl;
+abstract mixin class $UpdatingUserPasswordSuccessfullyCopyWith<$Res> implements $UsermanagementStateCopyWith<$Res> {
+  factory $UpdatingUserPasswordSuccessfullyCopyWith(UpdatingUserPasswordSuccessfully value, $Res Function(UpdatingUserPasswordSuccessfully) _then) = _$UpdatingUserPasswordSuccessfullyCopyWithImpl;
 @useResult
 $Res call({
- UpdateProfile updateprofile
+ AppResponse<Map<String, dynamic>> response
 });
 
 
-$UpdateProfileCopyWith<$Res> get updateprofile;
+
 
 }
 /// @nodoc
-class _$UsermanagementEventCopyWithImpl<$Res>
-    implements $UsermanagementEventCopyWith<$Res> {
-  _$UsermanagementEventCopyWithImpl(this._self, this._then);
+class _$UpdatingUserPasswordSuccessfullyCopyWithImpl<$Res>
+    implements $UpdatingUserPasswordSuccessfullyCopyWith<$Res> {
+  _$UpdatingUserPasswordSuccessfullyCopyWithImpl(this._self, this._then);
 
-  final UsermanagementEvent _self;
-  final $Res Function(UsermanagementEvent) _then;
+  final UpdatingUserPasswordSuccessfully _self;
+  final $Res Function(UpdatingUserPasswordSuccessfully) _then;
 
-/// Create a copy of UsermanagementEvent
+/// Create a copy of UsermanagementState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? updateprofile = null,}) {
-  return _then(_self.copyWith(
-updateprofile: null == updateprofile ? _self.updateprofile : updateprofile // ignore: cast_nullable_to_non_nullable
-as UpdateProfile,
+@pragma('vm:prefer-inline') $Res call({Object? response = null,}) {
+  return _then(UpdatingUserPasswordSuccessfully(
+response: null == response ? _self.response : response // ignore: cast_nullable_to_non_nullable
+as AppResponse<Map<String, dynamic>>,
   ));
 }
-/// Create a copy of UsermanagementEvent
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$UpdateProfileCopyWith<$Res> get updateprofile {
-  
-  return $UpdateProfileCopyWith<$Res>(_self.updateprofile, (value) {
-    return _then(_self.copyWith(updateprofile: value));
-  });
+
+
 }
+
+/// @nodoc
+
+
+class UpdatingUserPasswordFailed implements UsermanagementState {
+  const UpdatingUserPasswordFailed({required this.errormessage});
+  
+
+ final  String errormessage;
+
+/// Create a copy of UsermanagementState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdatingUserPasswordFailedCopyWith<UpdatingUserPasswordFailed> get copyWith => _$UpdatingUserPasswordFailedCopyWithImpl<UpdatingUserPasswordFailed>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdatingUserPasswordFailed&&(identical(other.errormessage, errormessage) || other.errormessage == errormessage));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,errormessage);
+
+@override
+String toString() {
+  return 'UsermanagementState.updatinguserpasswordFailed(errormessage: $errormessage)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdatingUserPasswordFailedCopyWith<$Res> implements $UsermanagementStateCopyWith<$Res> {
+  factory $UpdatingUserPasswordFailedCopyWith(UpdatingUserPasswordFailed value, $Res Function(UpdatingUserPasswordFailed) _then) = _$UpdatingUserPasswordFailedCopyWithImpl;
+@useResult
+$Res call({
+ String errormessage
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdatingUserPasswordFailedCopyWithImpl<$Res>
+    implements $UpdatingUserPasswordFailedCopyWith<$Res> {
+  _$UpdatingUserPasswordFailedCopyWithImpl(this._self, this._then);
+
+  final UpdatingUserPasswordFailed _self;
+  final $Res Function(UpdatingUserPasswordFailed) _then;
+
+/// Create a copy of UsermanagementState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errormessage = null,}) {
+  return _then(UpdatingUserPasswordFailed(
+errormessage: null == errormessage ? _self.errormessage : errormessage // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class LoadingToUpdateUserPincode implements UsermanagementState {
+  const LoadingToUpdateUserPincode();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadingToUpdateUserPincode);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'UsermanagementState.loadingtoupdateuserpincode()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class UpdatingUserPincodeSuccessfully implements UsermanagementState {
+  const UpdatingUserPincodeSuccessfully({required this.response});
+  
+
+ final  AppResponse<Map<String, dynamic>> response;
+
+/// Create a copy of UsermanagementState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdatingUserPincodeSuccessfullyCopyWith<UpdatingUserPincodeSuccessfully> get copyWith => _$UpdatingUserPincodeSuccessfullyCopyWithImpl<UpdatingUserPincodeSuccessfully>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdatingUserPincodeSuccessfully&&(identical(other.response, response) || other.response == response));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,response);
+
+@override
+String toString() {
+  return 'UsermanagementState.updatinguserpincodesuccessfully(response: $response)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdatingUserPincodeSuccessfullyCopyWith<$Res> implements $UsermanagementStateCopyWith<$Res> {
+  factory $UpdatingUserPincodeSuccessfullyCopyWith(UpdatingUserPincodeSuccessfully value, $Res Function(UpdatingUserPincodeSuccessfully) _then) = _$UpdatingUserPincodeSuccessfullyCopyWithImpl;
+@useResult
+$Res call({
+ AppResponse<Map<String, dynamic>> response
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdatingUserPincodeSuccessfullyCopyWithImpl<$Res>
+    implements $UpdatingUserPincodeSuccessfullyCopyWith<$Res> {
+  _$UpdatingUserPincodeSuccessfullyCopyWithImpl(this._self, this._then);
+
+  final UpdatingUserPincodeSuccessfully _self;
+  final $Res Function(UpdatingUserPincodeSuccessfully) _then;
+
+/// Create a copy of UsermanagementState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? response = null,}) {
+  return _then(UpdatingUserPincodeSuccessfully(
+response: null == response ? _self.response : response // ignore: cast_nullable_to_non_nullable
+as AppResponse<Map<String, dynamic>>,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class UpdatingUserPincodeFailed implements UsermanagementState {
+  const UpdatingUserPincodeFailed({required this.errormessage});
+  
+
+ final  String errormessage;
+
+/// Create a copy of UsermanagementState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdatingUserPincodeFailedCopyWith<UpdatingUserPincodeFailed> get copyWith => _$UpdatingUserPincodeFailedCopyWithImpl<UpdatingUserPincodeFailed>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdatingUserPincodeFailed&&(identical(other.errormessage, errormessage) || other.errormessage == errormessage));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,errormessage);
+
+@override
+String toString() {
+  return 'UsermanagementState.updatinguserpincodeFailed(errormessage: $errormessage)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdatingUserPincodeFailedCopyWith<$Res> implements $UsermanagementStateCopyWith<$Res> {
+  factory $UpdatingUserPincodeFailedCopyWith(UpdatingUserPincodeFailed value, $Res Function(UpdatingUserPincodeFailed) _then) = _$UpdatingUserPincodeFailedCopyWithImpl;
+@useResult
+$Res call({
+ String errormessage
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdatingUserPincodeFailedCopyWithImpl<$Res>
+    implements $UpdatingUserPincodeFailedCopyWith<$Res> {
+  _$UpdatingUserPincodeFailedCopyWithImpl(this._self, this._then);
+
+  final UpdatingUserPincodeFailed _self;
+  final $Res Function(UpdatingUserPincodeFailed) _then;
+
+/// Create a copy of UsermanagementState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errormessage = null,}) {
+  return _then(UpdatingUserPincodeFailed(
+errormessage: null == errormessage ? _self.errormessage : errormessage // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+mixin _$UsermanagementEvent {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UsermanagementEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'UsermanagementEvent()';
+}
+
+
+}
+
+/// @nodoc
+class $UsermanagementEventCopyWith<$Res>  {
+$UsermanagementEventCopyWith(UsermanagementEvent _, $Res Function(UsermanagementEvent) __);
 }
 
 
@@ -651,11 +975,13 @@ extension UsermanagementEventPatterns on UsermanagementEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( UpdateUserProfile value)?  updateprofile,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( UpdateUserProfile value)?  updateprofile,TResult Function( UpdatePassword value)?  updatepassword,TResult Function( UpdatePinCode value)?  updatepincode,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case UpdateUserProfile() when updateprofile != null:
-return updateprofile(_that);case _:
+return updateprofile(_that);case UpdatePassword() when updatepassword != null:
+return updatepassword(_that);case UpdatePinCode() when updatepincode != null:
+return updatepincode(_that);case _:
   return orElse();
 
 }
@@ -673,11 +999,13 @@ return updateprofile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( UpdateUserProfile value)  updateprofile,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( UpdateUserProfile value)  updateprofile,required TResult Function( UpdatePassword value)  updatepassword,required TResult Function( UpdatePinCode value)  updatepincode,}){
 final _that = this;
 switch (_that) {
 case UpdateUserProfile():
-return updateprofile(_that);}
+return updateprofile(_that);case UpdatePassword():
+return updatepassword(_that);case UpdatePinCode():
+return updatepincode(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -691,11 +1019,13 @@ return updateprofile(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( UpdateUserProfile value)?  updateprofile,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( UpdateUserProfile value)?  updateprofile,TResult? Function( UpdatePassword value)?  updatepassword,TResult? Function( UpdatePinCode value)?  updatepincode,}){
 final _that = this;
 switch (_that) {
 case UpdateUserProfile() when updateprofile != null:
-return updateprofile(_that);case _:
+return updateprofile(_that);case UpdatePassword() when updatepassword != null:
+return updatepassword(_that);case UpdatePinCode() when updatepincode != null:
+return updatepincode(_that);case _:
   return null;
 
 }
@@ -712,10 +1042,12 @@ return updateprofile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( UpdateProfile updateprofile)?  updateprofile,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( UpdateProfile updateprofile)?  updateprofile,TResult Function( ChangePassword changepassword)?  updatepassword,TResult Function( ChangePinCode changepincode)?  updatepincode,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case UpdateUserProfile() when updateprofile != null:
-return updateprofile(_that.updateprofile);case _:
+return updateprofile(_that.updateprofile);case UpdatePassword() when updatepassword != null:
+return updatepassword(_that.changepassword);case UpdatePinCode() when updatepincode != null:
+return updatepincode(_that.changepincode);case _:
   return orElse();
 
 }
@@ -733,10 +1065,12 @@ return updateprofile(_that.updateprofile);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( UpdateProfile updateprofile)  updateprofile,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( UpdateProfile updateprofile)  updateprofile,required TResult Function( ChangePassword changepassword)  updatepassword,required TResult Function( ChangePinCode changepincode)  updatepincode,}) {final _that = this;
 switch (_that) {
 case UpdateUserProfile():
-return updateprofile(_that.updateprofile);}
+return updateprofile(_that.updateprofile);case UpdatePassword():
+return updatepassword(_that.changepassword);case UpdatePinCode():
+return updatepincode(_that.changepincode);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -750,10 +1084,12 @@ return updateprofile(_that.updateprofile);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( UpdateProfile updateprofile)?  updateprofile,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( UpdateProfile updateprofile)?  updateprofile,TResult? Function( ChangePassword changepassword)?  updatepassword,TResult? Function( ChangePinCode changepincode)?  updatepincode,}) {final _that = this;
 switch (_that) {
 case UpdateUserProfile() when updateprofile != null:
-return updateprofile(_that.updateprofile);case _:
+return updateprofile(_that.updateprofile);case UpdatePassword() when updatepassword != null:
+return updatepassword(_that.changepassword);case UpdatePinCode() when updatepincode != null:
+return updatepincode(_that.changepincode);case _:
   return null;
 
 }
@@ -768,11 +1104,11 @@ class UpdateUserProfile implements UsermanagementEvent {
   const UpdateUserProfile({required this.updateprofile});
   
 
-@override final  UpdateProfile updateprofile;
+ final  UpdateProfile updateprofile;
 
 /// Create a copy of UsermanagementEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $UpdateUserProfileCopyWith<UpdateUserProfile> get copyWith => _$UpdateUserProfileCopyWithImpl<UpdateUserProfile>(this, _$identity);
 
@@ -798,13 +1134,13 @@ String toString() {
 /// @nodoc
 abstract mixin class $UpdateUserProfileCopyWith<$Res> implements $UsermanagementEventCopyWith<$Res> {
   factory $UpdateUserProfileCopyWith(UpdateUserProfile value, $Res Function(UpdateUserProfile) _then) = _$UpdateUserProfileCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  UpdateProfile updateprofile
 });
 
 
-@override $UpdateProfileCopyWith<$Res> get updateprofile;
+$UpdateProfileCopyWith<$Res> get updateprofile;
 
 }
 /// @nodoc
@@ -817,7 +1153,7 @@ class _$UpdateUserProfileCopyWithImpl<$Res>
 
 /// Create a copy of UsermanagementEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? updateprofile = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? updateprofile = null,}) {
   return _then(UpdateUserProfile(
 updateprofile: null == updateprofile ? _self.updateprofile : updateprofile // ignore: cast_nullable_to_non_nullable
 as UpdateProfile,
@@ -832,6 +1168,156 @@ $UpdateProfileCopyWith<$Res> get updateprofile {
   
   return $UpdateProfileCopyWith<$Res>(_self.updateprofile, (value) {
     return _then(_self.copyWith(updateprofile: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class UpdatePassword implements UsermanagementEvent {
+  const UpdatePassword({required this.changepassword});
+  
+
+ final  ChangePassword changepassword;
+
+/// Create a copy of UsermanagementEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdatePasswordCopyWith<UpdatePassword> get copyWith => _$UpdatePasswordCopyWithImpl<UpdatePassword>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdatePassword&&(identical(other.changepassword, changepassword) || other.changepassword == changepassword));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,changepassword);
+
+@override
+String toString() {
+  return 'UsermanagementEvent.updatepassword(changepassword: $changepassword)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdatePasswordCopyWith<$Res> implements $UsermanagementEventCopyWith<$Res> {
+  factory $UpdatePasswordCopyWith(UpdatePassword value, $Res Function(UpdatePassword) _then) = _$UpdatePasswordCopyWithImpl;
+@useResult
+$Res call({
+ ChangePassword changepassword
+});
+
+
+$ChangePasswordCopyWith<$Res> get changepassword;
+
+}
+/// @nodoc
+class _$UpdatePasswordCopyWithImpl<$Res>
+    implements $UpdatePasswordCopyWith<$Res> {
+  _$UpdatePasswordCopyWithImpl(this._self, this._then);
+
+  final UpdatePassword _self;
+  final $Res Function(UpdatePassword) _then;
+
+/// Create a copy of UsermanagementEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? changepassword = null,}) {
+  return _then(UpdatePassword(
+changepassword: null == changepassword ? _self.changepassword : changepassword // ignore: cast_nullable_to_non_nullable
+as ChangePassword,
+  ));
+}
+
+/// Create a copy of UsermanagementEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChangePasswordCopyWith<$Res> get changepassword {
+  
+  return $ChangePasswordCopyWith<$Res>(_self.changepassword, (value) {
+    return _then(_self.copyWith(changepassword: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class UpdatePinCode implements UsermanagementEvent {
+  const UpdatePinCode({required this.changepincode});
+  
+
+ final  ChangePinCode changepincode;
+
+/// Create a copy of UsermanagementEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdatePinCodeCopyWith<UpdatePinCode> get copyWith => _$UpdatePinCodeCopyWithImpl<UpdatePinCode>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdatePinCode&&(identical(other.changepincode, changepincode) || other.changepincode == changepincode));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,changepincode);
+
+@override
+String toString() {
+  return 'UsermanagementEvent.updatepincode(changepincode: $changepincode)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdatePinCodeCopyWith<$Res> implements $UsermanagementEventCopyWith<$Res> {
+  factory $UpdatePinCodeCopyWith(UpdatePinCode value, $Res Function(UpdatePinCode) _then) = _$UpdatePinCodeCopyWithImpl;
+@useResult
+$Res call({
+ ChangePinCode changepincode
+});
+
+
+$ChangePinCodeCopyWith<$Res> get changepincode;
+
+}
+/// @nodoc
+class _$UpdatePinCodeCopyWithImpl<$Res>
+    implements $UpdatePinCodeCopyWith<$Res> {
+  _$UpdatePinCodeCopyWithImpl(this._self, this._then);
+
+  final UpdatePinCode _self;
+  final $Res Function(UpdatePinCode) _then;
+
+/// Create a copy of UsermanagementEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? changepincode = null,}) {
+  return _then(UpdatePinCode(
+changepincode: null == changepincode ? _self.changepincode : changepincode // ignore: cast_nullable_to_non_nullable
+as ChangePinCode,
+  ));
+}
+
+/// Create a copy of UsermanagementEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChangePinCodeCopyWith<$Res> get changepincode {
+  
+  return $ChangePinCodeCopyWith<$Res>(_self.changepincode, (value) {
+    return _then(_self.copyWith(changepincode: value));
   });
 }
 }

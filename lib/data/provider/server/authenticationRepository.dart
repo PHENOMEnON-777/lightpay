@@ -45,4 +45,12 @@ Future<AppResponse<Map<String,dynamic>>> loginwithtoken() async {
   );
 }
 
+Future<AppResponse<Map<String,dynamic>>> logoutuser() async {
+  final token = await getAccessToken();
+  final response = await http.get(Uri.parse(Endpoints.logout,),
+  headers: {'Content-Type': 'application/json', 'Accept': 'application/json',"Authorization": "Bearer $token" },);
+  final responseData = jsonDecode(response.body) as Map<String, dynamic>;
+  return AppResponse<Map<String,dynamic>>.fromJson(responseData,  (json) =>json as Map<String,dynamic>,
+  );
+}
 }

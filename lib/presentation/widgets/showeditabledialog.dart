@@ -149,12 +149,19 @@ class _ShowEditableDialogState extends State<ShowEditableDialog>with SingleTicke
           ),
           BlocConsumer<UsermanagementBloc, UsermanagementState>(
             listener: (context, state) {
-              _animationController.reverse().then((_) {
-                Navigator.pop(context); 
-                     if(state is UpdatingUserProfileSuccessfully){
-                     context.read<AuthBloc>().add(AuthEvent.loginwithToken());
-                }
-              });
+             if (state is UpdatingUserProfileSuccessfully) {
+                    _animationController.reverse().then((_) {
+                Navigator.pop(context);
+                   context.read<AuthBloc>().add(AuthEvent.loginwithToken());
+                    });
+                  } else if (state is UpdatingUserProfileFailed) {
+                _animationController.reverse().then((_) {
+                 Navigator.pop(context);
+                   ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Failed to update profile')),
+                     );
+                       });
+                         }
             },
             builder: (context, state) {
               final bool isLoading = state is LoadingToUpdateUserProfile ;
@@ -182,11 +189,10 @@ class _ShowEditableDialogState extends State<ShowEditableDialog>with SingleTicke
                         height: 24,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.black), // Spinner color
                         ),
                       )
                     : Text(
-                         'Save Changes', // Dynamic button text
+                         'Save', // Dynamic button text
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

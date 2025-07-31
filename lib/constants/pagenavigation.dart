@@ -10,5 +10,7 @@ class Pagenavigation {
  static const String sendmoneyscreen = '/sendmoneyscreen';
  static const String settingscreen = '/settingscreen';
  static const String profilescreen = '/profilescreen';
+ static const String changepasswordscreen = '/changepasswordscreen';
+ static const String changepincodescreeen = '/changepincodescreen';
 }
 

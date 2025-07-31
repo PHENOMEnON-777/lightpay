@@ -41,4 +41,13 @@ Future<AppResponse<Map<String,dynamic>>> loginwithtoken() async {
     rethrow;
   }
 }
+
+Future<AppResponse<Map<String,dynamic>>> logoutuser() async {
+  try {
+    final response = await authenticationServerservice.logoutuser();
+    return response;
+  } catch (e) {
+    rethrow;
+  }
+}
 }

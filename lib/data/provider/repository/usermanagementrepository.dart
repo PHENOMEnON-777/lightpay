@@ -1,7 +1,8 @@
 
 
 import 'package:lightpay/data/model/appresponsemodel.dart/appresponse.dart';
-import 'package:lightpay/data/model/userid/userid.dart';
+import 'package:lightpay/data/model/changepassword/changepassword.dart';
+import 'package:lightpay/data/model/changepincode/changepincode.dart';
 import 'package:lightpay/data/model/usermangament/updateprofile/updateprofile.dart';
 import 'package:lightpay/data/provider/server/usermanagerserverservice.dart';
 
@@ -18,9 +19,18 @@ class UserManagementRepository {
   }
 }
 
-Future<AppResponse<Map<String,dynamic>>> getuserbyid({required UserId userid}) async {
+Future<AppResponse<Map<String,dynamic>>> updatepassword({required ChangePassword changepassword}) async {
   try {
-    final response = await userManagerServerService.getuserbyid(userid: userid);
+    final response = await userManagerServerService.updatepassword(changepassword: changepassword);
+    return response;
+  } catch (e) {
+    rethrow;
+  }
+}
+
+Future<AppResponse<Map<String,dynamic>>> updatepincode({required ChangePinCode changepincode}) async {
+  try {
+    final response = await userManagerServerService.updatepincode(changepincode: changepincode);
     return response;
   } catch (e) {
     rethrow;

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lightpay/constants/pagenavigation.dart';
 import 'package:lightpay/logic/bloc/authbloc/Auth/Auth_bloc.dart';
+import 'package:lightpay/logic/bloc/themebloc/Theme/Theme_bloc.dart';
 import 'package:lightpay/presentation/widgets/pincodeverification.dart';
 import 'package:lightpay/presentation/widgets/selectpaymentmethod.dart';
 
@@ -121,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               onSelected: (Menuoptions value) {
                                 setState(() {
                                   if (value == Menuoptions.appmode) {
+                                    context.read<ThemeBloc>().add(ThemeEvent.changeappmode());
                                   } else if (value == Menuoptions.settings) {
                                     Navigator.of(
                                       context,

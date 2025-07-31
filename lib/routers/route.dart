@@ -8,6 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lightpay/constants/pagenavigation.dart';
 import 'package:lightpay/data/model/appresponsemodel.dart/appresponse.dart';
+import 'package:lightpay/presentation/screens/changepasswordscreen.dart';
+import 'package:lightpay/presentation/screens/changepincodescreen.dart';
 import 'package:lightpay/presentation/screens/loginscreen.dart';
 import 'package:lightpay/presentation/screens/nfcpaymentscreen.dart';
 import 'package:lightpay/presentation/screens/profilescreen.dart';
@@ -41,6 +43,10 @@ class AppRoute {
       return MaterialPageRoute(builder: (context)=> SettingsScreen());
       case Pagenavigation.profilescreen:
       return MaterialPageRoute(builder: (context)=> ProfileScreen());
+      case Pagenavigation.changepasswordscreen:
+      return MaterialPageRoute(builder: (context)=>ChangePasswordScreen());
+      case Pagenavigation.changepincodescreeen:
+      return MaterialPageRoute(builder: (context)=>ChangePincodeScreen());
        default:
       return  MaterialPageRoute(
             builder: ((context) => Scaffold(

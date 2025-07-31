@@ -6,7 +6,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lightpay/constants/apiurls.dart';
 import 'package:lightpay/data/model/appresponsemodel.dart/appresponse.dart';
-import 'package:lightpay/data/model/userid/userid.dart';
+import 'package:lightpay/data/model/changepassword/changepassword.dart';
+import 'package:lightpay/data/model/changepincode/changepincode.dart';
 import 'package:lightpay/data/model/usermangament/updateprofile/updateprofile.dart';
 
 class UserManagerServerService {
@@ -29,10 +30,18 @@ class UserManagerServerService {
   );
 }
 
-Future<AppResponse<Map<String,dynamic>>> getuserbyid({required UserId userid}) async {
+Future<AppResponse<Map<String,dynamic>>> updatepassword({required ChangePassword changepassword}) async {
   final token = await getAccessToken();
-  final response = await http.post(Uri.parse(Endpoints.getUserById,),
-  headers: {'Content-Type': 'application/json', 'Accept': 'application/json',"Authorization": "Bearer $token" },body:jsonEncode(userid.toJson()),);
+  final response = await http.post(Uri.parse(Endpoints.updateUserPassword,),
+  headers: {'Content-Type': 'application/json', 'Accept': 'application/json',"Authorization": "Bearer $token" },body:jsonEncode(changepassword.toJson()),);
+  final responseData = jsonDecode(response.body) as Map<String, dynamic>;
+  return AppResponse<Map<String,dynamic>>.fromJson(responseData,  (json) =>json as Map<String,dynamic>,
+  );
+}
+Future<AppResponse<Map<String,dynamic>>> updatepincode({required ChangePinCode changepincode}) async {
+  final token = await getAccessToken();
+  final response = await http.post(Uri.parse(Endpoints.updateUserPinCode,),
+  headers: {'Content-Type': 'application/json', 'Accept': 'application/json',"Authorization": "Bearer $token" },body:jsonEncode(changepincode.toJson()),);
   final responseData = jsonDecode(response.body) as Map<String, dynamic>;
   return AppResponse<Map<String,dynamic>>.fromJson(responseData,  (json) =>json as Map<String,dynamic>,
   );

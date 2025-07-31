@@ -40,5 +40,15 @@ class AuthBloc extends Bloc<AuthEvent,AuthState>{
         emit(AuthState.loginwithtokenFailed(errormessage: e.toString()));
       }
     });
+
+    on<LogOut>((event, emit) async{
+     emit(AuthState.logingoutuser());
+     try {
+       final response = await authenticationRepository.logoutuser();
+       emit(AuthState.logingoutusersuccessfully(response: response));
+     } catch (e) {
+       emit(AuthState.loginoutuserfailed(errormessage: e.toString()));
+     }
+    });
   }
 }

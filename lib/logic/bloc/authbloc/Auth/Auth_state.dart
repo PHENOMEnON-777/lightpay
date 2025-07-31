@@ -15,4 +15,8 @@ class AuthState with _$AuthState {
   const factory AuthState.loadingwithtoken() = LoadingToGetUserWithToken;
   const factory AuthState.loginwithtokensuccessfully({required AppResponse<Map<String,dynamic>> response}) = LoginWithTokenSuccessfully;
   const factory AuthState.loginwithtokenFailed({required String errormessage}) = LoginWithTokenFailed;
+
+  const factory AuthState.logingoutuser() = LogingOutUser;
+  const factory AuthState.logingoutusersuccessfully({required AppResponse<Map<String,dynamic>> response}) = LoginOUtUserSuccessfully;
+  const factory AuthState.loginoutuserfailed({required  String errormessage}) = LoginOutUserFailed;
 }   
