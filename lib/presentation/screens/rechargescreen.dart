@@ -76,111 +76,124 @@ class _RechargeScreenState extends State<RechargeScreen>  {
       },
       builder: (context, state) {
         return Scaffold(
+          backgroundColor:Theme.of(context).secondaryHeaderColor,
           appBar: AppBar(
-            title: const Text("Recharge"),
-            backgroundColor: Colors.blue,
+            title: const Text("Recharge",style:TextStyle(color:Colors.white),),
+            backgroundColor: Theme.of(context).secondaryHeaderColor 
           ),
           // Add GestureDetector to dismiss keyboard when tapping outside
-          body: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    
-                    const SizedBox(height: 30),
-
-                    /// Amount field
-                    TextFormField(
-                      controller: _amountController,
-                      focusNode: _amountFocusNode, // Add focus node
-                      keyboardType: TextInputType.number,
-                      decoration:  InputDecoration(
-                        filled: true,
-                        labelText: 'Amount (XAF)',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide.none,
+          body: Container(
+            height: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondaryFixed,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+            ),
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      
+                      const SizedBox(height: 30),
+            
+                      /// Amount field
+                      TextFormField(
+                        controller: _amountController,
+                        focusNode: _amountFocusNode, // Add focus node
+                        keyboardType: TextInputType.number,
+                        decoration:  InputDecoration(
+                          // labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSecondary,),
+                          filled: true,
+                          // fillColor: Colors.blueGrey,
+                          labelText: 'Amount (XAF)',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'enter an amount';
+                          }
+                          final amount = double.tryParse(value);
+                          if (amount == null || amount <= 0) {
+                            return 'invalid amount';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 20),
+            
+                      IntlPhoneField(
+                        focusNode: _phoneFocusNode, // Add focus node
+                        initialCountryCode: 'CM', 
+                        decoration: InputDecoration(
+                          // labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSecondary,),
+                          filled: true,
+                          //  fillColor: Colors.blueGrey,
+                          labelText: 'phone number',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
                           ),
+                          prefixIcon: Icon(Icons.phone_android),
+                        ),
+                        initialValue: _phoneController.text,
+                        onChanged: (phone) {
+                          _phoneController.text = phone.completeNumber;
+                        },
+                        validator: (phone) {
+                          if (phone == null || phone.number.isEmpty) {
+                            return 'Enter a phone number';
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'enter an amount';
-                        }
-                        final amount = double.tryParse(value);
-                        if (amount == null || amount <= 0) {
-                          return 'invalid amount';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-
-                    IntlPhoneField(
-                      focusNode: _phoneFocusNode, // Add focus node
-                      initialCountryCode: 'CM', 
-                      decoration: InputDecoration(
-                        filled: true,
-                        labelText: 'phone number',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide.none,
-                        ),
-                        prefixIcon: Icon(Icons.phone_android),
+                      const SizedBox(height: 20),
+            
+                      Text(
+                        'payment Services',
+                        style: TextStyle(color: Theme.of(context).colorScheme.onSecondary,)
                       ),
-                      initialValue: _phoneController.text,
-                      onChanged: (phone) {
-                        _phoneController.text = phone.completeNumber;
-                      },
-                      validator: (phone) {
-                        if (phone == null || phone.number.isEmpty) {
-                          return 'Enter a phone number';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-
-                    Text(
-                      'payment Services',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 10),
-                    Column(
-                      children: [
-                        _buildOperatorOption(
-                          value: PaymentOperator.orangeMoney,
-                          label: 'Orange Money',
-                          imagePath: 'lib/presentation/assets/images/orange_money_logo.png',
-                          bgColor: const Color(0xFFFFF3E0),
-                          borderColor: Colors.deepOrange,
-                        ),
-                        _buildOperatorOption(
-                          value: PaymentOperator.mtnMoney,
-                          label: 'MTN Money',
-                          imagePath: 'lib/presentation/assets/images/mtn_money_logo.png',
-                          bgColor: const Color(0xFFFFFDE7),
-                          borderColor: Colors.amber[800]!,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-
-                    
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        icon: const Icon(Icons.send),
-                        label: state is LoadingRecharge ? CircularProgressIndicator(strokeWidth: 2,) : Text(
-                          'Recharge with ${_selectedOperator == PaymentOperator.orangeMoney ? 'Orange Money' : 'MTN Money'}',
-                        ),
-                        onPressed: () => _submit(context),
+                      const SizedBox(height: 10),
+                      Column(
+                        children: [
+                          _buildOperatorOption(
+                            value: PaymentOperator.orangeMoney,
+                            label: 'Orange Money',
+                            imagePath: 'lib/presentation/assets/images/orange_money_logo.png',
+                            borderColor: const Color.fromARGB(255, 240, 127, 93),
+                          ),
+                          _buildOperatorOption(
+                            value: PaymentOperator.mtnMoney,
+                            label: 'MTN Money',
+                            imagePath: 'lib/presentation/assets/images/mtn_money_logo.png',
+                            borderColor: const Color.fromARGB(255, 255, 183, 89)!,
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 30),
+            
+                      
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          icon: const Icon(Icons.send),
+                          label: state is LoadingRecharge ? CircularProgressIndicator(strokeWidth: 2,) : Text(
+                            'Recharge with ${_selectedOperator == PaymentOperator.orangeMoney ? 'Orange Money' : 'MTN Money'}',
+                          ),
+                          onPressed: () => _submit(context),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -194,16 +207,16 @@ class _RechargeScreenState extends State<RechargeScreen>  {
     required PaymentOperator value,
     required String label,
     required String imagePath,
-    required Color bgColor,
     required Color borderColor,
   }) {
     final isSelected = _selectedOperator == value;
 
     return Card(
-      color: bgColor,
+      color: borderColor,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-            color: isSelected ? borderColor : Colors.transparent, width: 2),
+            color: isSelected ? Colors.blue : Colors.transparent, width: 2
+            ),
         borderRadius: BorderRadius.circular(12),
       ),
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -211,7 +224,6 @@ class _RechargeScreenState extends State<RechargeScreen>  {
         value: value,
         groupValue: _selectedOperator,
         onChanged: (val) => setState(() => _selectedOperator = val!),
-        activeColor: borderColor,
         contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         title: Row(
           children: [
@@ -221,7 +233,7 @@ class _RechargeScreenState extends State<RechargeScreen>  {
               child: Text(
                 label,
                 style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                     TextStyle(fontSize: 16, fontWeight: FontWeight.w600,color: Theme.of(context).colorScheme.onSecondary,),
               ),
             ),
           ],

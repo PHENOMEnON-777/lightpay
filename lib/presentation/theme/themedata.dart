@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-ThemeData lightmode = ThemeData(
+ThemeData darkmode = ThemeData(
   primaryColor: Colors.white,
   fontFamily: 'Lato',
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
     surface: Colors.white,
     primary: Colors.blue,
-    secondary: Colors.orange, 
+    secondary:  Color(0xFF1D375C), 
     onSurface: Colors.black,
     onPrimary: Colors.white,
     onSecondary: Colors.white,
     secondaryFixed: Colors.black,
   ),
-  secondaryHeaderColor: Color.fromARGB(255, 114, 153, 184),
+  secondaryHeaderColor: Color(0xFF18314F),
   // Override Material 3 defaults to prevent purple colors
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -28,20 +28,20 @@ ThemeData lightmode = ThemeData(
   ),
 );
 
-ThemeData darkmode = ThemeData(
+ThemeData lightmode = ThemeData(
   primaryColor: Colors.white,
   fontFamily: 'Lato',
   brightness: Brightness.dark,
   colorScheme: const ColorScheme.dark(
-    surface: Color.fromARGB(255, 2, 13, 35),
+    surface: Colors.black,
     primary: Colors.blue,
-    secondary: Colors.orange,
+    secondary: Color(0xFF1D375C),
     onSurface: Colors.white,
     onPrimary: Colors.white,
     onSecondary: Colors.black,
     secondaryFixed: Colors.white,
   ),
-      secondaryHeaderColor: Color.fromARGB(255, 10, 29, 67),
+      secondaryHeaderColor: Color(0xFF182F4E),
   // Override Material 3 defaults to prevent purple colors
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(

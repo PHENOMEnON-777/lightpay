@@ -66,7 +66,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen>  {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      // Add this to dismiss keyboard when tapping outside
+      backgroundColor: Theme.of(context).colorScheme.secondaryFixed,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: SingleChildScrollView(
@@ -93,8 +93,8 @@ class _SendMoneyScreenState extends State<SendMoneyScreen>  {
                         vertical: 24,
                         horizontal: 20,
                       ),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF2196F3),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).secondaryHeaderColor,
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(30),
                           bottomRight: Radius.circular(30),
@@ -107,7 +107,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen>  {
                             margin: const EdgeInsets.only(bottom: 30),
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              // color: AppColors.primary.withOpacity(0.1),
+                              color: Colors.blue,
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
@@ -116,7 +116,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen>  {
                               // color: AppColors.primary,
                             ),
                           ),
-                          Text('Send money', style: TextStyle(fontSize: 24)),
+                          Text('Send money', style: TextStyle(fontSize: 24, color: Colors.white,)),
                         ],
                       ),
                     ),
@@ -180,12 +180,22 @@ class _SendMoneyScreenState extends State<SendMoneyScreen>  {
                     SizedBox(
                       child: state is LoadingtoSendMoney 
                         ? CircularProgressIndicator(strokeWidth: 2)
-                        : ElevatedButton.icon(
-                            style: ButtonStyle(),
-                            icon: const Icon(Icons.send_rounded),
-                            label: const Text('Send'),
-                            onPressed: _handleSubmit
-                          ),
+                        : SizedBox(
+                          width: screenWidth * 0.9,
+                          child: ElevatedButton(
+                              style: ButtonStyle(),
+                              onPressed: _handleSubmit,
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                      Icon(Icons.send_rounded),
+                                    Text('Send'),
+                                  ],
+                                ),
+                              )
+                            ),
+                        ),
                     ),
                   ],
                 ),

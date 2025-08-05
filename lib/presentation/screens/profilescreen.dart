@@ -24,6 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.secondaryFixed,
       body:  SingleChildScrollView(
         child: Center(
             child: BlocBuilder<AuthBloc, AuthState>(
@@ -37,8 +38,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     vertical: 24,
                                     horizontal: 20,
                                   ),
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFF2196F3),
+                                  decoration:  BoxDecoration(
+                                    color: Theme.of(context).secondaryHeaderColor,
                                     borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(30),
                                       bottomRight: Radius.circular(30),
@@ -58,24 +59,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 50),
                                     child: ListTile(
-                                      title: Text('Name'),
-                                      subtitle: Text(state.response.data!['name']),
+                                      title: Text('Name',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),),
+                                      subtitle: Text(state.response.data!['name'],style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                       leading: CircleAvatar(child: Icon(Icons.abc)),
                                     ),
                                   ),
                                    Padding(
                                      padding: const EdgeInsets.only(left:50),
                                      child: ListTile(
-                                      title: Text('email'),
-                                      subtitle: Text(state.response.data!['email']),
+                                      title: Text('email',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
+                                      subtitle: Text(state.response.data!['email'],style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                       leading: CircleAvatar(child: Icon(Icons.email_rounded)),
                                                            ),
                                    ),
                                    Padding(
                                      padding: const EdgeInsets.only(left: 50),
                                      child: ListTile(
-                                      title: Text('phone'),
-                                      subtitle: Text(state.response.data!['phone']),
+                                      title: Text('phone',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
+                                      subtitle: Text(state.response.data!['phone'],style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                       leading: CircleAvatar(child: Icon(Icons.phone_enabled)),
                                                            ),
                                    ),
@@ -89,14 +90,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                            builder: (context) => ShowEditableDialog(userData: state.response.data!),
                                                  );
                                         
-                                       }, icon: Icon(Icons.edit)),
-                                       Text('edit profile')
+                                       }, icon: Icon(Icons.edit,color: Colors.blue,)),
+                                       Text('edit profile',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary))
                                      ],
                                    ),
                                   SizedBox(height: screenHeight * 0.03,),
                                   SizedBox(
                                     width: screenWidth * 0.9,
                                     child: Card(
+                                      color: Theme.of(context).colorScheme.secondaryFixed,
                                                         shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
                                                         ),
@@ -108,18 +110,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       children: [
                                         ListTile(
                                           onTap: ()=> Navigator.of(context).pushNamed(Pagenavigation.changepasswordscreen),
-                                          leading: const Icon(Icons.lock_outline),
-                                          title: const Text("Change password"),
+                                          leading:  Icon(Icons.lock_outline,color:Theme.of(context).colorScheme.onSecondary,),
+                                          title:  Text("Change password",style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                           trailing:
-                                              const Icon(Icons.arrow_forward_ios, size: 16),
+                                               Icon(Icons.arrow_forward_ios, size: 16,color: Theme.of(context).colorScheme.onSecondary,),
                                         ),
-                                        const Divider(),
+                                         Divider(color: Theme.of(context).colorScheme.onSecondary,),
                                         ListTile(
                                         onTap: () => Navigator.of(context).pushNamed(Pagenavigation.changepincodescreeen),
-                                          leading: const Icon(Icons.pin_outlined),
-                                          title: const Text("Change PIN code"),
+                                          leading:  Icon(Icons.pin_outlined,color: Theme.of(context).colorScheme.onSecondary,),
+                                          title: Text("Change PIN code",style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                           trailing:
-                                              const Icon(Icons.arrow_forward_ios, size: 16),
+                                               Icon(Icons.arrow_forward_ios, size: 16,color: Theme.of(context).colorScheme.onSecondary,),
                                         ),
                                       ],
                                     ),
@@ -158,24 +160,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 50),
                                     child: ListTile(
-                                      title: Text('Name'),
-                                      subtitle: Text('loading...'),
+                                      title: Text('Name',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
+                                      subtitle: Text('loading...',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                       leading: CircleAvatar(child: Icon(Icons.abc)),
                                     ),
                                   ),
                                    Padding(
                                      padding: const EdgeInsets.only(left:50),
                                      child: ListTile(
-                                      title: Text('email'),
-                                      subtitle: Text('loading...'),
+                                      title: Text('email',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
+                                      subtitle: Text('loading...',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                       leading: CircleAvatar(child: Icon(Icons.email_rounded)),
                                                            ),
                                    ),
                                    Padding(
                                      padding: const EdgeInsets.only(left: 50),
                                      child: ListTile(
-                                      title: Text('phone'),
-                                      subtitle: Text('loading...'),
+                                      title: Text('phone',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
+                                      subtitle: Text('loading...',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                       leading: CircleAvatar(child: Icon(Icons.phone_enabled)),
                                                            ),
                                    ),
@@ -185,8 +187,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                      children: [
                                        IconButton(onPressed: (){
                                         
-                                       }, icon: Icon(Icons.edit_calendar_rounded)),
-                                       Text('edit profile')
+                                       }, icon: Icon(Icons.edit_calendar_rounded,color: Colors.blue,)),
+                                       Text('edit profile',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary))
                                      ],
                                    ),
                                   SizedBox(height: screenHeight * 0.03,),

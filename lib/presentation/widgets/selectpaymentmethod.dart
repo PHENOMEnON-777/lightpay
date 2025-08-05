@@ -67,6 +67,7 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
               child: ScaleTransition(
                 scale: _scaleAnimation,
                 child: _buildPaymentCard(
+                  color: Theme.of(context).secondaryHeaderColor,
                   context,
                   icon: Icons.contactless_sharp,
                   title: 'Pay with NFC',
@@ -91,6 +92,7 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
               child: ScaleTransition(
                 scale: _scaleAnimation,
                 child: _buildPaymentCard(
+                  color: Theme.of(context).secondaryHeaderColor,
                   context,
                   icon: Icons.qr_code_2_sharp,
                   title: 'Pay with QR Code',
@@ -129,7 +131,8 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
     BuildContext context, {
     required IconData icon, 
     required String title, 
-    required VoidCallback onTap
+    required VoidCallback onTap,
+    required Color color
   }) {
     return InkWell(
       onTap: onTap,
@@ -138,6 +141,7 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
         height: MediaQuery.of(context).size.height * 0.12,
         width: MediaQuery.of(context).size.width * 0.9,
         child: Card(
+          color: color,
           child: Center(
             child: ListTile(
               leading: Icon(

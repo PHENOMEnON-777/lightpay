@@ -64,15 +64,15 @@ class _TabScreenState extends State<TabScreen> {
             borderRadius: BorderRadius.circular(100),
             child: NavigationBarTheme(
               data: NavigationBarThemeData(
-                backgroundColor: const Color.fromARGB(255, 16, 40, 58),
+                backgroundColor: Theme.of(context).secondaryHeaderColor ,
                 indicatorColor: Colors.blue.shade100,
                 labelTextStyle: WidgetStateProperty.all(
                   const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
               ),
               child: NavigationBar(
-                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-                animationDuration: const Duration(milliseconds: 400),
+                labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+                animationDuration: const Duration(milliseconds: 1000),
                 elevation: 8,
                 selectedIndex: index,
                 onDestinationSelected: _onItemTapped,

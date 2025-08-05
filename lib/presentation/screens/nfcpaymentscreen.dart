@@ -23,7 +23,7 @@ class _PaymentNFCScreenState extends State<PaymentNFCScreen> {
   @override
   void initState() {
     super.initState();
-    _startNFC(); // Start NFC session when widget is initialized
+    _startNFC(); 
   }
 
   void _startNFC() async {
@@ -149,13 +149,13 @@ class _PaymentNFCScreenState extends State<PaymentNFCScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: Theme.of(context).colorScheme.secondaryFixed,
       appBar: AppBar(
         title: const Text(
           "NFC Payment",
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
         ),
-        backgroundColor: const Color(0xFF2196F3),
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -184,8 +184,8 @@ class _PaymentNFCScreenState extends State<PaymentNFCScreen> {
                         vertical: 24,
                         horizontal: 20,
                       ),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF2196F3),
+                      decoration:  BoxDecoration(
+                        color: Theme.of(context).secondaryHeaderColor ,
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(30),
                           bottomRight: Radius.circular(30),

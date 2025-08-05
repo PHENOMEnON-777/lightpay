@@ -61,6 +61,7 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
         : 'N/A';
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.secondaryFixed,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +88,7 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                     child: const Icon(
                       Icons.info,
                       size: 60,
-                      color: Colors.white,
+                      // color: Colors.white,
                     ),
                   ),
                 );
@@ -121,7 +122,7 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                     child: const Icon(
                       Icons.check,
                       size: 60,
-                      color: Colors.white,
+                      // color: Colors.white,
                     ),
                   ),
                 );
@@ -143,9 +144,9 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                     offset: Offset(0, 20 * (1 - value)),
                     child: Text(
                       successMessage,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: 16,
-                        color: Color(0xFF666666),
+                     color: Theme.of(context).colorScheme.onSecondary,
                         height: 1.5,
                       ),
                       textAlign: TextAlign.center,
@@ -169,7 +170,6 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                         width: screenWidth * 0.9,
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
-                          color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             color: const Color(0xFF4CAF50).withOpacity(0.2),
@@ -193,16 +193,18 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                                   'Amount',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: Colors.grey.shade600,
+                                    // color: Colors.grey.shade600,
+                                    color: Theme.of(context).colorScheme.onSecondary,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
                                 Text(
                                   amount,
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF333333),
+                                  color: Theme.of(context).colorScheme.onSecondary,
+
                                   ),
                                 ),
                               ],
@@ -225,10 +227,11 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                                 ),
                                 Text(
                                   '#$transactionId',
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'monospace',
-                                    color: Color(0xFF333333),
+                                      color: Theme.of(context).colorScheme.onSecondary,
+
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -250,9 +253,9 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                                 ),
                                 Text(
                                   formattedDate,
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                     fontSize: 14,
-                                    color: Color(0xFF333333),
+                                     color: Theme.of(context).colorScheme.onSecondary,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -273,9 +276,9 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                                 ),
                                 Text(
                                   transactionType.toUpperCase(),
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                     fontSize: 14,
-                                    color: Color(0xFF333333),
+                                     color: Theme.of(context).colorScheme.onSecondary,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -297,9 +300,9 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                                   ),
                                   Text(
                                     receiverId,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 14,
-                                      color: Color(0xFF333333),
+                                      color: Theme.of(context).colorScheme.onSecondary,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -373,11 +376,12 @@ class _TransactionSuccessWidgetState extends State<TransactionSuccessWidget> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         'New action',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
+                         color: Theme.of(context).colorScheme.onSecondary,
                         ),
                       ),
                     ),

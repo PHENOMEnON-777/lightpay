@@ -141,6 +141,7 @@ class _TransactionFailedWidgetState extends State<TransactionFailedWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.secondaryFixed,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -184,12 +185,12 @@ class _TransactionFailedWidgetState extends State<TransactionFailedWidget> {
             const SizedBox(height: 32),
         
             // Error Title
-            const Text(
+             Text(
               'Transaction Failed',
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFFE57373),
+                  color: Theme.of(context).colorScheme.onSecondary,
               ),
               textAlign: TextAlign.center,
             ),
@@ -218,7 +219,7 @@ class _TransactionFailedWidgetState extends State<TransactionFailedWidget> {
                             Navigator.of(context).pop();
                 },
                 icon: const Icon(Icons.refresh),
-                label: const Text('Try Again'),
+                label:  Text('Try Again',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary,),),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF2196F3),
                   foregroundColor: Colors.white,

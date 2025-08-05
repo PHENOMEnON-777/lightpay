@@ -142,7 +142,7 @@ Widget _buildPinButton({String? label, IconData? icon, required VoidCallback onT
       width: 50,
       height: 50,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.blueGrey,
         borderRadius: BorderRadius.circular(12),
         // border: Border.all(color: Colo),
         boxShadow: [

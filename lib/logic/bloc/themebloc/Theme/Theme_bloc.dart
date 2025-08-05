@@ -9,16 +9,16 @@ part 'Theme_event.dart';
 part 'Theme_bloc.freezed.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent,ThemeState>{
-  late bool _isLightMode;
-  ThemeBloc({required bool isLightMode}) : super(ThemeState.initial(themeData: isLightMode ? lightmode : darkmode)){
-    on<ThemeEvent>((event, emit)async {
+   bool _isLightMode;
+  ThemeBloc({required bool isLightMode}): _isLightMode = isLightMode,  super(ThemeState.initial(themeData: isLightMode ? lightmode : darkmode)){
+    on<ChangeAPPMode>((event, emit)async {
       emit(ThemeState.changingappmode());
       try {
         _isLightMode = !_isLightMode; 
         await Storethemedata().setbool('islightmode', _isLightMode);
         emit(ThemeState.changingappmodesuccessfully(themeData: _isLightMode ? lightmode : darkmode));
       } catch (e) {
-        ThemeState.initial(themeData: isLightMode ? lightmode : darkmode);
+        emit(ThemeState.initial(themeData: isLightMode ? lightmode : darkmode));
       }
     });
   }

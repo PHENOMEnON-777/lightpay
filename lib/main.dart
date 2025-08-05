@@ -120,9 +120,7 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           // BlocProvider(create: (context) => InternetBloc()),
-          BlocProvider(
-            create: (context) => ThemeBloc(isLightMode: islightmode),
-          ),
+          BlocProvider( create: (context) => ThemeBloc(isLightMode: islightmode),  ),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {

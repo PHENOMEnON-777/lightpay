@@ -166,32 +166,24 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
-          color: theme.inputDecorationTheme.fillColor ?? Colors.grey[100],
+          color: Colors.black,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: focusedField == field ? theme.primaryColor : Colors.transparent,
+            color: focusedField == field ? Colors.blue : Colors.grey,
             width: 1.5,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
         ),
         child: Row(
           children: [
             Icon(
               field == 'current'
                   ? Icons.lock_outline
-                  : (field == 'new' ? Icons.key_outlined : Icons.repeat_outlined),
-              color: theme.primaryColor,
+                  : (field == 'new' ? Icons.key_outlined : Icons.repeat_outlined),color: Colors.white,
             ),
             const SizedBox(width: 12),
             Text(
               label,
-              style: theme.textTheme.bodyLarge?.copyWith(fontSize: 16),
+              style: TextStyle(color: Colors.white),
             ),
             const Spacer(),
             Row(
@@ -201,7 +193,7 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
                   child: Icon(
                     index < value.length ? Icons.circle : Icons.circle_outlined,
                     size: 12,
-                    color: index < value.length ? theme.primaryColor : theme.disabledColor,
+                    color: index < value.length ? Colors.blue : Colors.grey,
                   ),
                 );
               }),
@@ -243,8 +235,8 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                     padding: const EdgeInsets.all(20),
-                    backgroundColor: isDisabled ? theme.disabledColor : theme.primaryColor,
-                    foregroundColor: Colors.white,
+                    backgroundColor: isDisabled ? theme.disabledColor : Colors.blue,
+                    // foregroundColor: Colors.white,
                     elevation: isDisabled ? 0 : 3,
                     minimumSize: const Size(60, 60),
                   ),
@@ -268,66 +260,77 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: Theme.of(context).secondaryHeaderColor ,
       appBar: AppBar(
-        title: const Text('Modify PIN Code'),
+      backgroundColor: Theme.of(context).secondaryHeaderColor ,
+        title: const Text('Modify PIN Code',style: TextStyle(color: Colors.white),),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: theme.appBarTheme.backgroundColor,
       ),
-      body: BlocConsumer<UsermanagementBloc, UsermanagementState>(
-        listener: (context, state) {
-          if (state is UpdatingUserPincodeSuccessfully) {
-            _updateStoredPin(newPin);
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('PIN code modified successfully')),
-            );
-            Navigator.pop(context);
-          } else if (state is UpdatingUserPincodeFailed) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Failed to modify PIN code', ),),
-            );
-            setState(() {
-              currentPin = '';
-              newPin = '';
-              confirmPin = '';
-              focusedField = 'current';
-            });
-          }
-        },
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                if (isDefaultPin)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: Row(
-                      children: [
-                        Icon(Icons.info_outline, color: theme.colorScheme.error),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'Your PIN is set to a default value. Please change it for security.',
-                            style: TextStyle(color: theme.colorScheme.error),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                _buildPinField('Current PIN Code', currentPin, 'current'),
-                _buildPinField('New PIN Code', newPin, 'new'),
-                _buildPinField('Confirm New PIN Code', confirmPin, 'confirm'),
-                const SizedBox(height: 32),
-                if (state is LoadingToUpdateUserPincode)
-                  CircularProgressIndicator(strokeWidth: 2, color: theme.primaryColor)
-                else
-                  _buildKeyboard(),
-              ],
+      body: Container(
+         height: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondaryFixed,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
             ),
-          );
-        },
+        child: BlocConsumer<UsermanagementBloc, UsermanagementState>(
+          listener: (context, state) {
+            if (state is UpdatingUserPincodeSuccessfully) {
+              _updateStoredPin(newPin);
+              ScaffoldMessenger.of(context).showSnackBar(
+                 SnackBar(content: Text(state.response.message)),
+              );
+              Navigator.pop(context);
+            } else if (state is UpdatingUserPincodeFailed) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Failed to modify PIN code', ),),
+              );
+              setState(() {
+                currentPin = '';
+                newPin = '';
+                confirmPin = '';
+                focusedField = 'current';
+              });
+            }
+          },
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  if (isDefaultPin)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Row(
+                        children: [
+                          Icon(Icons.info_outline, color: theme.colorScheme.error),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              'Your PIN is set to a default value. Please change it for security.',
+                              style: TextStyle(color: theme.colorScheme.error),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  _buildPinField('Current PIN Code', currentPin, 'current'),
+                  _buildPinField('New PIN Code', newPin, 'new'),
+                  _buildPinField('Confirm New PIN Code', confirmPin, 'confirm'),
+                  const SizedBox(height: 32),
+                  if (state is LoadingToUpdateUserPincode)
+                    CircularProgressIndicator(strokeWidth: 2, color: theme.primaryColor)
+                  else
+                    _buildKeyboard(),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

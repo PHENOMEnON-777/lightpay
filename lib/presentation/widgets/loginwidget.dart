@@ -92,7 +92,7 @@ class _AuthState extends State<LoginWidget>
                   : screenHeight * 0.69,
           width: screenWidth * 0.75,
           child: Card(
-            color: Theme.of(context).colorScheme.surface,
+            color: Theme.of(context).secondaryHeaderColor ,
             child: Padding(
               padding: const EdgeInsets.all(3.0),
               child: Form(
@@ -100,46 +100,87 @@ class _AuthState extends State<LoginWidget>
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      const Text('LightPay', style: TextStyle(fontSize: 24)),
+                      const Text('LightPay', style: TextStyle(fontSize: 24,color: Colors.white)),
                        SizedBox(height: screenHeight * 0.01),
-                         _authMode == AuthMode.signup ?   TextFormField(
-                          controller: nameController,
-                              enabled: _authMode == AuthMode.signup,
-                              decoration: InputDecoration(
-                                filled: true,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(100),
-                                  borderSide: BorderSide.none,
+                         _authMode == AuthMode.signup ?   Padding(
+                           padding: const EdgeInsets.only(right: 8.0,left: 8.0),
+                           child: TextFormField(
+                            controller: nameController,
+                                enabled: _authMode == AuthMode.signup,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  labelText: 'user name',
                                 ),
-                                labelText: 'user name',
-                              ),
-                              validator:
-                                  _authMode == AuthMode.signup
-                                      ? (value) {
-                                        if (value!.isEmpty ||
-                                            value.length > 20) {
-                                          return 'invalid user name!';
+                                validator:
+                                    _authMode == AuthMode.signup
+                                        ? (value) {
+                                          if (value!.isEmpty ||
+                                              value.length > 20) {
+                                            return 'invalid user name!';
+                                          }
+                                          return null;
                                         }
-                                        return null;
-                                      }
-                                      : null,
-                            ): SizedBox.shrink(), 
+                                        : null,
+                              ),
+                         ): SizedBox.shrink(), 
                        SizedBox(height: screenHeight * 0.01),
                       SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0,left: 8.0),
+                          child: TextFormField(
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(100),
+                                borderSide: BorderSide.none,
+                              ),
+                              labelText: 'Email',
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value!.isEmpty || !value.contains('@')) {
+                                return 'Invalid email!';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {},
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.01),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0,left: 8.0),
                         child: TextFormField(
-                          controller: emailController,
+                        
                           decoration: InputDecoration(
                             filled: true,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(100),
                               borderSide: BorderSide.none,
                             ),
-                            labelText: 'Email',
+                            labelText: 'Password',
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  hide = !hide;
+                                });
+                              },
+                              icon:
+                                  hide
+                                      ? const Icon(Icons.visibility_off)
+                                      : const Icon(Icons.visibility),
+                            ),
                           ),
-                          keyboardType: TextInputType.emailAddress,
+                          obscureText: hide,
+                          controller: passwordController,
                           validator: (value) {
-                            if (value!.isEmpty || !value.contains('@')) {
-                              return 'Invalid email!';
+                            if (value!.isEmpty || value.length < 8) {
+                              return 'At least 8 Characters!';
                             }
                             return null;
                           },
@@ -147,43 +188,11 @@ class _AuthState extends State<LoginWidget>
                         ),
                       ),
                       SizedBox(height: screenHeight * 0.01),
-                      TextFormField(
-                      
-                        decoration: InputDecoration(
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            borderSide: BorderSide.none,
-                          ),
-                          labelText: 'Password',
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                hide = !hide;
-                              });
-                            },
-                            icon:
-                                hide
-                                    ? const Icon(Icons.visibility_off)
-                                    : const Icon(Icons.visibility),
-                          ),
-                        ),
-                        obscureText: hide,
-                        controller: passwordController,
-                        validator: (value) {
-                          if (value!.isEmpty || value.length < 8) {
-                            return 'At least 8 Characters!';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {},
-                      ),
-                      SizedBox(height: screenHeight * 0.01),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ExpandableContainer(
-                          backgroundColor: Theme.of(context).colorScheme.surface,
-                          color: Theme.of(context).colorScheme.surface,
+                          
+                          backgroundColor: Theme.of(context).secondaryHeaderColor ,
                           controller: _controller,
                           initialState:
                               _authMode == AuthMode.login
@@ -281,7 +290,7 @@ class _AuthState extends State<LoginWidget>
                             }
                           }
                         },
-                        child:state is LoadInProgress || state is LoadingLogin ? CircularProgressIndicator(strokeWidth: 2,) : Text(
+                        child:state is LoadInProgress || state is LoadingLogin ? CircularProgressIndicator(strokeWidth: 2,color: Theme.of(context).colorScheme.secondaryFixed,) : Text(
                           _authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP',
                         ),
                       ),

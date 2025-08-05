@@ -77,17 +77,15 @@ class _HistorScreenState extends State<HistorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: Theme.of(context).secondaryHeaderColor ,
       appBar: AppBar(
       elevation: 0,
-      backgroundColor: Colors.blue,
+      backgroundColor: Theme.of(context).secondaryHeaderColor ,
       title: _isSearchVisible ? TextField(
       controller: _searchController,
-      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
                     hintText: 'Search...',
                     filled: true,
-                    // fillColor: Colors.white,
                     contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -96,12 +94,15 @@ class _HistorScreenState extends State<HistorScreen> {
                     prefixIcon: const Icon(Icons.search),
                   ),
       onChanged: (value) {
+
         // TODO: Implement search functionality
+
+
       },
-    ) : const Text('History'),
+    ) : const Text('History',style: TextStyle(color: Colors.white),),
       actions: [
         IconButton(
-          icon: Icon(_isSearchVisible ? Icons.close : Icons.search),
+          icon: Icon(_isSearchVisible ? Icons.close : Icons.search,color: Colors.white,),
           onPressed: () {
             setState(() {
               _isSearchVisible = !_isSearchVisible;
@@ -111,11 +112,21 @@ class _HistorScreenState extends State<HistorScreen> {
         ),
       ],
     ),
-      body: Column(
-        children: [
-          _buildTabBar(),
-          Expanded(child: _buildContent()),
-        ],
+      body: Container(
+        height: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondaryFixed,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+            ),
+        child: Column(
+          children: [
+            _buildTabBar(),
+            Expanded(child: _buildContent()),
+          ],
+        ),
       ),
     );
   }
@@ -226,15 +237,15 @@ class _HistorScreenState extends State<HistorScreen> {
               backgroundColor: _getStatusColor(status).withOpacity(0.1),
               child: Icon(Icons.payment, color: _getStatusColor(status)),
             ),
-            title: Text('#${transaction['id']}'),
-            subtitle: Text(_formatDate(date)),
+            title: Text('#${transaction['id']}',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),),
+            subtitle: Text(_formatDate(date),style: TextStyle(color: Colors.blueGrey),),
             trailing: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   '${amount.toStringAsFixed(0)} FCFA',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold,color:Theme.of(context).colorScheme.onSecondary),
                 ),
                 _buildStatusChip(status),
               ],
@@ -243,7 +254,7 @@ class _HistorScreenState extends State<HistorScreen> {
               ),
               SizedBox(
                 width: screenWidth * 0.2  ,
-                child: Divider())
+                child: Divider(color:Theme.of(context).colorScheme.onSecondary ,))
         ],
       );
   }
@@ -257,18 +268,19 @@ class _HistorScreenState extends State<HistorScreen> {
     final date = DateTime.parse(recharge['created_at']);
     
     return Card(
+      color: Theme.of(context).colorScheme.secondaryFixed,
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: _getProviderColor(provider).withOpacity(0.1),
           child: Icon(Icons.currency_exchange_rounded, color: _getProviderColor(provider)),
         ),
-        title: Text('$provider Recharge'),
+        title: Text('$provider Recharge',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(phone),
-            Text(_formatDate(date), style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+            Text(phone,style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
+            Text(_formatDate(date), style: TextStyle(fontSize: 12,color: Colors.blueGrey)),
           ],
         ),
         trailing: Column(
@@ -277,7 +289,7 @@ class _HistorScreenState extends State<HistorScreen> {
           children: [
             Text(
               '${amount.toStringAsFixed(0)} FCFA',
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold,color:Theme.of(context).colorScheme.onSecondary),
             ),
             _buildStatusChip(status),
           ],
@@ -316,7 +328,7 @@ class _HistorScreenState extends State<HistorScreen> {
           Icon(
             _currentType == HistoryType.transaction ? Icons.payment : Icons.phone_android,
             size: 64,
-            color: Colors.grey[400],
+            // color: Colors.grey[400],
           ),
           const SizedBox(height: 16),
           Text(

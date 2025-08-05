@@ -438,8 +438,9 @@ class _QRcodePaymentScreenState extends State<QRcodePaymentScreen>
                 ),
                 child: Text(
                   barcode.rawValue ?? 'No QR Code Value',
-                  style: const TextStyle(fontFamily: 'monospace', fontSize: 12),
+                  style:  TextStyle(fontFamily: 'monospace', fontSize: 12,color: Colors.black),
                   textAlign: TextAlign.center,
+                  
                 ),
               ),
               const SizedBox(height: 20),
