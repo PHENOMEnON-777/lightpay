@@ -2,28 +2,22 @@
 
 import 'dart:convert';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:lightpay/constants/apiurls.dart';
 import 'package:lightpay/data/model/appresponsemodel.dart/appresponse.dart';
 import 'package:lightpay/data/model/recharge/recharge.dart';
+import 'package:lightpay/utils/customhttpclient.dart';
 
 class RechargeServerService {
 
- Future<String?> getAccessToken() async {
-    final FlutterSecureStorage storage = const FlutterSecureStorage();
-    final tokenString = 'token';
-    final token =  await storage.read(key: tokenString);
-     return token;
-  }
+  final Dio _dioClient;
+
+  RechargeServerService({Dio? dioClient,}):_dioClient = dioClient ?? DioClient().instance;
+
 
 Future<AppResponse<Map<String,dynamic>>>recharge({required Recharge recharge}) async {
-    final token = await getAccessToken();
-  final response = await http.post(Uri.parse(Endpoints.initRecharge,),
-  headers: {'Content-Type': 'application/json', 'Accept': 'application/json',"Authorization": "Bearer $token" }, body:jsonEncode(recharge.toJson()),);
-  final responseData = jsonDecode(response.body) as Map<String, dynamic>;
-  return AppResponse<Map<String,dynamic>>.fromJson(responseData,  (json) =>json as Map<String,dynamic>,
-  );
+  final response = await _dioClient.post(Endpoints.initRecharge,data:jsonEncode(recharge.toJson()),);
+  return AppResponse<Map<String,dynamic>>.fromJson(response.data,  (json) =>json as Map<String,dynamic>, );
 }
 
 }

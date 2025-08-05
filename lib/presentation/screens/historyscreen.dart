@@ -19,6 +19,8 @@ class _HistorScreenState extends State<HistorScreen> {
   HistoryType _currentType = HistoryType.transaction;
   bool _isLoadingMore = false;
 
+  List<dynamic> _filteredItems = [];
+
   @override
   void initState() {
     super.initState();
@@ -65,7 +67,10 @@ class _HistorScreenState extends State<HistorScreen> {
   void _switchTab(HistoryType type) {
     if (_currentType == type) return;
     
-    setState(() => _currentType = type);
+    setState(() {
+      _currentType = type;
+      _filteredItems.clear();
+    });
     
     if (type == HistoryType.transaction) {
       context.read<HistoryBloc>().add(HistoryEvent.gethistory());
@@ -77,50 +82,49 @@ class _HistorScreenState extends State<HistorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).secondaryHeaderColor ,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       appBar: AppBar(
-      elevation: 0,
-      backgroundColor: Theme.of(context).secondaryHeaderColor ,
-      title: _isSearchVisible ? TextField(
-      controller: _searchController,
-      decoration: InputDecoration(
-                    hintText: 'Search...',
-                    filled: true,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none,
-                    ),
-                    prefixIcon: const Icon(Icons.search),
+        elevation: 0,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
+        title: _isSearchVisible
+            ? TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search...',
+                  filled: true,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
                   ),
-      onChanged: (value) {
-
-        // TODO: Implement search functionality
-
-
-      },
-    ) : const Text('History',style: TextStyle(color: Colors.white),),
-      actions: [
-        IconButton(
-          icon: Icon(_isSearchVisible ? Icons.close : Icons.search,color: Colors.white,),
-          onPressed: () {
-            setState(() {
-              _isSearchVisible = !_isSearchVisible;
-              if (!_isSearchVisible) _searchController.clear();
-            });
-          },
-        ),
-      ],
-    ),
+                  prefixIcon: const Icon(Icons.search),
+                ),
+                onChanged: (value) {
+                  setState(() {}); // triggers filtering on rebuild
+                },
+              )
+            : const Text('History', style: TextStyle(color: Colors.white)),
+        actions: [
+          IconButton(
+            icon: Icon(_isSearchVisible ? Icons.close : Icons.search, color: Colors.white),
+            onPressed: () {
+              setState(() {
+                _isSearchVisible = !_isSearchVisible;
+                if (!_isSearchVisible) _searchController.clear();
+              });
+            },
+          ),
+        ],
+      ),
       body: Container(
         height: double.infinity,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondaryFixed,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-            ),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondaryFixed,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
         child: Column(
           children: [
             _buildTabBar(),
@@ -130,14 +134,12 @@ class _HistorScreenState extends State<HistorScreen> {
       ),
     );
   }
-  // Tab Bar
+
   Widget _buildTabBar() {
-    return 
-    Container(
+    return Container(
       color: Colors.transparent,
       padding: const EdgeInsets.all(16),
-      child: 
-      Row(
+      child: Row(
         children: [
           Expanded(child: _buildTab('Transactions', HistoryType.transaction, Icons.payment)),
           const SizedBox(width: 12),
@@ -176,17 +178,16 @@ class _HistorScreenState extends State<HistorScreen> {
     );
   }
 
-  // Content
   Widget _buildContent() {
     return BlocBuilder<HistoryBloc, HistoryState>(
       builder: (context, state) {
         return state.maybeWhen(
           initial: () => _buildEmptyState(),
-          loadinghistory: () => const Center(child: CircularProgressIndicator(strokeWidth: 2,)),
-          loadinglistofrecharge: () => const Center(child: CircularProgressIndicator(strokeWidth: 2,)),
+          loadinghistory: () => const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+          loadinglistofrecharge: () => const Center(child: CircularProgressIndicator(strokeWidth: 2)),
           getlistoftransactionsbyuserIdsuccessfull: (response) => _buildList(response, true),
           getlistofrechargebyuserIdsuccessfull: (response) => _buildList(response, false),
-          orElse:()=>Center(child: CircularProgressIndicator(strokeWidth: 2,),),
+          orElse: () => const Center(child: CircularProgressIndicator(strokeWidth: 2)),
         );
       },
     );
@@ -194,16 +195,31 @@ class _HistorScreenState extends State<HistorScreen> {
 
   Widget _buildList(dynamic response, bool isTransaction) {
     final dataKey = isTransaction ? 'transactions' : 'recharges';
-    final items = response.data[dataKey]['data'] as List;
+    final allItems = response.data[dataKey]['data'] as List;
 
-    if (items.isEmpty) return _buildEmptyState();
+    _filteredItems = _searchController.text.isEmpty
+        ? allItems
+        : allItems.where((item) {
+            final search = _searchController.text.toLowerCase();
+            if (isTransaction) {
+              return item['id'].toString().contains(search) ||
+                  item['amount'].toString().contains(search) ||
+                  item['status'].toString().toLowerCase().contains(search);
+            } else {
+              return item['provider'].toString().toLowerCase().contains(search) ||
+                  item['phone'].toString().contains(search) ||
+                  item['amount'].toString().contains(search);
+            }
+          }).toList();
+
+    if (_filteredItems.isEmpty) return _buildEmptyState();
 
     return ListView.builder(
       controller: _scrollController,
       padding: const EdgeInsets.all(16),
-      itemCount: items.length + (_isLoadingMore ? 1 : 0),
+      itemCount: _filteredItems.length + (_isLoadingMore ? 1 : 0),
       itemBuilder: (context, index) {
-        if (index == items.length) {
+        if (index == _filteredItems.length) {
           return const Center(
             child: Padding(
               padding: EdgeInsets.all(16),
@@ -211,55 +227,48 @@ class _HistorScreenState extends State<HistorScreen> {
             ),
           );
         }
-        return isTransaction 
-            ? _buildTransactionCard(items[index])
-            : _buildRechargeCard(items[index]);
+        return isTransaction
+            ? _buildTransactionCard(_filteredItems[index])
+            : _buildRechargeCard(_filteredItems[index]);
       },
     );
   }
 
-  // Transaction Card
   Widget _buildTransactionCard(Map<String, dynamic> transaction) {
     final screenWidth = MediaQuery.of(context).size.width;
-
     final amount = double.parse(transaction['amount'].toString());
     final status = transaction['status'].toString();
     final date = DateTime.parse(transaction['created_at']);
     
-    return
-    //  Card(
-    //   margin: const EdgeInsets.only(bottom: 12),
-    //   child: 
-      Column(
-        children: [
-          ListTile(
-            leading: CircleAvatar(
-              backgroundColor: _getStatusColor(status).withOpacity(0.1),
-              child: Icon(Icons.payment, color: _getStatusColor(status)),
-            ),
-            title: Text('#${transaction['id']}',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),),
-            subtitle: Text(_formatDate(date),style: TextStyle(color: Colors.blueGrey),),
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  '${amount.toStringAsFixed(0)} FCFA',
-                  style: TextStyle(fontWeight: FontWeight.bold,color:Theme.of(context).colorScheme.onSecondary),
-                ),
-                _buildStatusChip(status),
-              ],
-            ),
-          // ),
+    return Column(
+      children: [
+        ListTile(
+          leading: CircleAvatar(
+            backgroundColor: _getStatusColor(status).withOpacity(0.1),
+            child: Icon(Icons.payment, color: _getStatusColor(status)),
+          ),
+          title: Text('#${transaction['id']}', style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
+          subtitle: Text(_formatDate(date), style: const TextStyle(color: Colors.blueGrey)),
+          trailing: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                '${amount.toStringAsFixed(0)} FCFA',
+                style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondary),
               ),
-              SizedBox(
-                width: screenWidth * 0.2  ,
-                child: Divider(color:Theme.of(context).colorScheme.onSecondary ,))
-        ],
-      );
+              _buildStatusChip(status),
+            ],
+          ),
+        ),
+        SizedBox(
+          width: screenWidth * 0.2,
+          child: Divider(color: Theme.of(context).colorScheme.onSecondary),
+        )
+      ],
+    );
   }
 
-  // Recharge Card
   Widget _buildRechargeCard(Map<String, dynamic> recharge) {
     final amount = double.parse(recharge['amount'].toString());
     final status = recharge['status'].toString();
@@ -275,12 +284,12 @@ class _HistorScreenState extends State<HistorScreen> {
           backgroundColor: _getProviderColor(provider).withOpacity(0.1),
           child: Icon(Icons.currency_exchange_rounded, color: _getProviderColor(provider)),
         ),
-        title: Text('$provider Recharge',style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),),
+        title: Text('$provider Recharge', style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(phone,style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
-            Text(_formatDate(date), style: TextStyle(fontSize: 12,color: Colors.blueGrey)),
+            Text(phone, style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
+            Text(_formatDate(date), style: const TextStyle(fontSize: 12, color: Colors.blueGrey)),
           ],
         ),
         trailing: Column(
@@ -289,7 +298,7 @@ class _HistorScreenState extends State<HistorScreen> {
           children: [
             Text(
               '${amount.toStringAsFixed(0)} FCFA',
-              style: TextStyle(fontWeight: FontWeight.bold,color:Theme.of(context).colorScheme.onSecondary),
+              style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondary),
             ),
             _buildStatusChip(status),
           ],
@@ -299,7 +308,6 @@ class _HistorScreenState extends State<HistorScreen> {
     );
   }
 
-  // Status Chip
   Widget _buildStatusChip(String status) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -318,8 +326,6 @@ class _HistorScreenState extends State<HistorScreen> {
     );
   }
 
-  
-
   Widget _buildEmptyState() {
     return Center(
       child: Column(
@@ -328,25 +334,22 @@ class _HistorScreenState extends State<HistorScreen> {
           Icon(
             _currentType == HistoryType.transaction ? Icons.payment : Icons.phone_android,
             size: 64,
-            // color: Colors.grey[400],
           ),
           const SizedBox(height: 16),
           Text(
-            _currentType == HistoryType.transaction 
-                ? 'No transactions found' 
-                : 'No recharges found',
+            _currentType == HistoryType.transaction ? 'No transactions found' : 'No recharges found',
             style: TextStyle(fontSize: 18, color: Colors.grey[600]),
           ),
         ],
       ),
     );
   }
-  // Helper Methods
+
   Color _getStatusColor(String status) {
     switch (status.toLowerCase()) {
       case 'approved': return Colors.green;
       case 'pending': return Colors.orange;
-      case 'failed': return  Colors.deepOrangeAccent;
+      case 'failed': return Colors.deepOrangeAccent;
       default: return Colors.grey;
     }
   }

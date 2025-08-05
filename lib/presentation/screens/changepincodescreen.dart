@@ -157,7 +157,6 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
   }
 
   Widget _buildPinField(String label, String value, String field) {
-    final theme = Theme.of(context);
     return GestureDetector(
       onTap: () => setState(() => focusedField = field),
       child: AnimatedContainer(
@@ -281,13 +280,13 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
             if (state is UpdatingUserPincodeSuccessfully) {
               _updateStoredPin(newPin);
               ScaffoldMessenger.of(context).showSnackBar(
-                 SnackBar(content: Text(state.response.message)),
+                 SnackBar(content: Text(state.response.message,style: TextStyle(color: Colors.green),)),
               );
               Navigator.pop(context);
             } else if (state is UpdatingUserPincodeFailed) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Failed to modify PIN code', ),),
+                  content: Text('Failed to modify PIN code',style: TextStyle(color: Colors.red), ),),
               );
               setState(() {
                 currentPin = '';
@@ -312,7 +311,7 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
                           Expanded(
                             child: Text(
                               'Your PIN is set to a default value. Please change it for security.',
-                              style: TextStyle(color: theme.colorScheme.error),
+                              style: TextStyle(color: Colors.amber),
                             ),
                           ),
                         ],

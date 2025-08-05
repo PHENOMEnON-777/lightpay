@@ -130,7 +130,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                     ],);
                 }
-                
                    return Column(
                       children: [
                         Container(
@@ -139,8 +138,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     vertical: 24,
                                     horizontal: 20,
                                   ),
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFF2196F3),
+                                  decoration:  BoxDecoration(
+                                    color: Theme.of(context).secondaryHeaderColor,
                                     borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(30),
                                       bottomRight: Radius.circular(30),
@@ -195,6 +194,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   SizedBox(
                                     width: screenWidth * 0.9,
                                     child: Card(
+                                      color: Theme.of(context).colorScheme.secondaryFixed,
                                                         shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
                                                         ),
@@ -207,17 +207,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ListTile(
                                           onTap: () {},
                                           leading: const Icon(Icons.lock_outline),
-                                          title: const Text("Change password"),
+                                          title:  Text("Change password",style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                           trailing:
-                                              const Icon(Icons.arrow_forward_ios, size: 16),
+                                               Icon(Icons.arrow_forward_ios, size: 16,color: Theme.of(context).colorScheme.onSecondary,),
                                         ),
-                                        const Divider(),
+                                         Divider(color: Theme.of(context).colorScheme.onSecondary,),
                                         ListTile(
                                         onTap: () {},
                                           leading: const Icon(Icons.pin_outlined),
-                                          title: const Text("Change PIN code"),
+                                          title:  Text("Change PIN code",style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
                                           trailing:
-                                              const Icon(Icons.arrow_forward_ios, size: 16),
+                                               Icon(Icons.arrow_forward_ios, size: 16,color: Theme.of(context).colorScheme.onSecondary,),
                                         ),
                                       ],
                                     ),
