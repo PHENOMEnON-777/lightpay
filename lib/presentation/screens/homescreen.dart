@@ -326,10 +326,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       children: [
                          FadeTransition(
                     opacity: _fadeAnimation,
-                    child: const Text(
-                      'Quick Actions',
+                    child: Text(
+                      'Quick actions',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSecondary,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),

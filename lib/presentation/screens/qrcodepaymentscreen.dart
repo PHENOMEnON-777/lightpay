@@ -27,7 +27,6 @@ class _QRcodePaymentScreenState extends State<QRcodePaymentScreen>
     super.initState();
     cameraController = MobileScannerController(
       detectionSpeed: DetectionSpeed.noDuplicates,
-      returnImage: true,
       detectionTimeoutMs: Duration.microsecondsPerMillisecond,
     );
     _animationController = AnimationController(
@@ -314,14 +313,6 @@ class _QRcodePaymentScreenState extends State<QRcodePaymentScreen>
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(height: 4),
-                          const Text(
-                            'Position the QR code within the frame to scan',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
                         ],
                       ),
                     ),
@@ -423,13 +414,14 @@ class _QRcodePaymentScreenState extends State<QRcodePaymentScreen>
             children: [
               Icon(Icons.qr_code, color: Theme.of(context).primaryColor),
               const SizedBox(width: 8),
-              const Text('QR Code Detected'),
             ],
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(height: 16),
+              // const SizedBox(height: 5),
+              CircleAvatar(radius: 50,backgroundColor: Colors.green,child: Icon(Icons.check_circle_outline_rounded,size: 50,),),
+              const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -438,7 +430,7 @@ class _QRcodePaymentScreenState extends State<QRcodePaymentScreen>
                 ),
                 child: Text(
                   barcode.rawValue ?? 'No QR Code Value',
-                  style:  TextStyle(fontFamily: 'monospace', fontSize: 12,color: Colors.black),
+                  style:  TextStyle(fontFamily: 'monospace', fontSize: 12,color: Colors.black,),
                   textAlign: TextAlign.center,
                   
                 ),

@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:lightpay/constants/pagenavigation.dart';
 import 'package:nfc_manager/nfc_manager.dart';
@@ -114,13 +115,19 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> with SingleTi
       context: context, 
       builder: (context) {
         return AlertDialog(
-          title: const Text('NFC Not Available !!!'),
+          title: const Text('NFC Not Available !!!',style: TextStyle(color: Colors.amber),),
           content: const Text('NFC technology may not be available on this device or its disable in your settings.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               child: const Text('OK'),
             ),
+            TextButton(
+              onPressed:(){
+                AppSettings.openAppSettings(type: AppSettingsType.nfc,asAnotherTask: true);
+              },
+              child:Text('Settings')
+            )
           ],
         );
       }
