@@ -6,7 +6,7 @@ import 'package:lightpay/data/provider/repository/historyRepository.dart';
 import 'package:lightpay/data/provider/repository/rechargerepository.dart';
 import 'package:lightpay/data/provider/repository/transactionrepository.dart';
 import 'package:lightpay/data/provider/repository/usermanagementrepository.dart';
-import 'package:lightpay/data/provider/server/authenticationRepository.dart';
+import 'package:lightpay/data/provider/server/authenticationserverservice.dart';
 import 'package:lightpay/data/provider/server/historyserverservice.dart';
 import 'package:lightpay/data/provider/server/rechargeserverservice.dart';
 import 'package:lightpay/data/provider/server/transactionserverservices.dart';

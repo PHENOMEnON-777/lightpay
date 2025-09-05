@@ -444,11 +444,7 @@ class _QRcodePaymentScreenState extends State<QRcodePaymentScreen>
                     bool pinVerified = await promptUserPinCode(context, () {});
                     if (pinVerified == true) {
                       final transaction = Transaction(amount: 2000);
-                      context.read<TransactionBloc>().add(
-                        TransactionEvent.transactionInitiation(
-                          transaction: transaction,
-                        ),
-                      );
+                      context.read<TransactionBloc>().add(TransactionEvent.transactionInitiation(transaction: transaction,),);
                     }
                     Navigator.of(context).pop();
 

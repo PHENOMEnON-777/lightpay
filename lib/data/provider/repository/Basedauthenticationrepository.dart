@@ -2,7 +2,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lightpay/data/model/appresponsemodel.dart/appresponse.dart';
 import 'package:lightpay/data/model/usermodel/user.dart';
-import 'package:lightpay/data/provider/server/authenticationRepository.dart';
+import 'package:lightpay/data/provider/server/authenticationserverservice.dart';
 
  class AuthenticationRepository {
  final AuthenticationServerservice authenticationServerservice;

@@ -162,8 +162,8 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        margin: const EdgeInsets.symmetric(vertical: 6), // Reduced from 8 to 6
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12), // Reduced from 14 to 12
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(12),
@@ -177,12 +177,13 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
             Icon(
               field == 'current'
                   ? Icons.lock_outline
-                  : (field == 'new' ? Icons.key_outlined : Icons.repeat_outlined),color: Colors.white,
+                  : (field == 'new' ? Icons.key_outlined : Icons.repeat_outlined),
+              color: Colors.white,
             ),
             const SizedBox(width: 12),
             Text(
               label,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             const Spacer(),
             Row(
@@ -222,7 +223,7 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
               final isDisabled = isOkButton && !isComplete;
 
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(6.0), // Reduced from 8.0 to 6.0
                 child: ElevatedButton(
                   onPressed: isDisabled
                       ? null
@@ -233,19 +234,18 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
                               : () => _onNumberPressed(key),
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(18), // Reduced from 20 to 18
                     backgroundColor: isDisabled ? theme.disabledColor : Colors.blue,
-                    // foregroundColor: Colors.white,
                     elevation: isDisabled ? 0 : 3,
-                    minimumSize: const Size(60, 60),
+                    minimumSize: const Size(55, 55), // Reduced from 60x60 to 55x55
                   ),
                   child: isOkButton
-                      ? const Icon(Icons.check, size: 24)
+                      ? const Icon(Icons.check, size: 22) // Reduced from 24 to 22
                       : key == '<'
-                          ? const Icon(Icons.backspace, size: 24)
+                          ? const Icon(Icons.backspace, size: 22) // Reduced from 24 to 22
                           : Text(
                               key,
-                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600), // Reduced from 20 to 18
                             ),
                 ),
               );
@@ -259,34 +259,35 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).secondaryHeaderColor ,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       appBar: AppBar(
-      backgroundColor: Theme.of(context).secondaryHeaderColor ,
-        title: const Text('Modify PIN Code',style: TextStyle(color: Colors.white),),
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
+        title: const Text('Modify PIN Code', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         elevation: 0,
       ),
       body: Container(
-         height: double.infinity,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondaryFixed,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-            ),
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondaryFixed,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
         child: BlocConsumer<UsermanagementBloc, UsermanagementState>(
           listener: (context, state) {
             if (state is UpdatingUserPincodeSuccessfully) {
               _updateStoredPin(newPin);
               ScaffoldMessenger.of(context).showSnackBar(
-                 SnackBar(content: Text(state.response.message,style: TextStyle(color: Colors.green),)),
+                SnackBar(content: Text(state.response.message, style: const TextStyle(color: Colors.green))),
               );
               Navigator.pop(context);
             } else if (state is UpdatingUserPincodeFailed) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Failed to modify PIN code',style: TextStyle(color: Colors.red), ),),
+                const SnackBar(
+                  content: Text('Failed to modify PIN code', style: TextStyle(color: Colors.red)),
+                ),
               );
               setState(() {
                 currentPin = '';
@@ -297,35 +298,38 @@ class _ChangePincodeScreenState extends State<ChangePincodeScreen> {
             }
           },
           builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  if (isDefaultPin)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Row(
-                        children: [
-                          Icon(Icons.info_outline, color: theme.colorScheme.error),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'Your PIN is set to a default value. Please change it for security.',
-                              style: TextStyle(color: Colors.amber),
+            return SingleChildScrollView( // Added SingleChildScrollView
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // Added this to make Column take minimum space
+                  children: [
+                    if (isDefaultPin)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 12), // Reduced from 16 to 12
+                        child: Row(
+                          children: [
+                            Icon(Icons.info_outline, color: theme.colorScheme.error),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                'Your PIN is set to a default value. Please change it for security.',
+                                style: const TextStyle(color: Colors.amber),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  _buildPinField('Current PIN Code', currentPin, 'current'),
-                  _buildPinField('New PIN Code', newPin, 'new'),
-                  _buildPinField('Confirm New PIN Code', confirmPin, 'confirm'),
-                  const SizedBox(height: 32),
-                  if (state is LoadingToUpdateUserPincode)
-                    CircularProgressIndicator(strokeWidth: 2, color: theme.primaryColor)
-                  else
-                    _buildKeyboard(),
-                ],
+                    _buildPinField('Current PIN Code', currentPin, 'current'),
+                    _buildPinField('New PIN Code', newPin, 'new'),
+                    _buildPinField('Confirm New PIN Code', confirmPin, 'confirm'),
+                    const SizedBox(height: 20), // Reduced from 32 to 20
+                    if (state is LoadingToUpdateUserPincode)
+                      CircularProgressIndicator(strokeWidth: 2, color: theme.primaryColor)
+                    else
+                      _buildKeyboard(),
+                  ],
+                ),
               ),
             );
           },

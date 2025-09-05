@@ -17,6 +17,15 @@ class TransactionRepository {
   }
 }
 
+  Future<AppResponse<Map<String,dynamic>>> getmomoaccesstoken() async {
+  try {
+    final response = await transactionServerServices.getmomoaccesstoken();
+    return response;
+  } catch (e) {
+    rethrow;
+  }
+}
+
 Future<AppResponse<Map<String,dynamic>>> sendMoney({required SendMoney sendmoney}) async {
   try {
     final response = await transactionServerServices.sendMoney(sendmoney: sendmoney);

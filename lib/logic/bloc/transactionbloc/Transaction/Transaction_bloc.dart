@@ -35,5 +35,15 @@ class TransactionBloc extends Bloc<TransactionEvent,TransactionState>{
           emit(TransactionState.sendMoneyFailed(errromessage: e.toString()));
         }
        });
+
+       on<MomoAccessToken>((event, emit) async{
+        emit(const TransactionState.momopaymentaccesstokenloading());
+        try {
+          final response = await transactionrepository.getmomoaccesstoken();
+          emit(TransactionState.momopaymentaccesstokenloadingsuccessfull(response: response));
+        } catch (e) {
+          emit(TransactionState.momopaymentaccesstokenloadingfailed(errormessga: e.toString()));
+        }
+       });
   }
 }

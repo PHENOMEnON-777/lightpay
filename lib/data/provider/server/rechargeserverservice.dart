@@ -1,23 +1,47 @@
-
-
 import 'dart:convert';
-
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 import 'package:lightpay/constants/apiurls.dart';
 import 'package:lightpay/data/model/appresponsemodel.dart/appresponse.dart';
 import 'package:lightpay/data/model/recharge/recharge.dart';
-import 'package:lightpay/utils/customhttpclient.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class RechargeServerService {
+ final FlutterSecureStorage _storage = const FlutterSecureStorage();
+  final String _tokenKey = 'token';
 
-  final Dio _dioClient;
+  Map<String, String> get _commonHeaders => {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      };
 
-  RechargeServerService({Dio? dioClient,}):_dioClient = dioClient ?? DioClient().instance;
+  Future<String?> getAccessToken() async {
+    return await _storage.read(key: _tokenKey);
+  }
 
-
-Future<AppResponse<Map<String,dynamic>>>recharge({required Recharge recharge}) async {
-  final response = await _dioClient.post(Endpoints.initRecharge,data:jsonEncode(recharge.toJson()),);
-  return AppResponse<Map<String,dynamic>>.fromJson(response.data,  (json) =>json as Map<String,dynamic>, );
-}
-
+  Future<Map<String, String>> _getAuthHeaders() async {
+    final token = await getAccessToken();
+    return {
+      ..._commonHeaders,
+      if (token != null) "Authorization": "Bearer $token",
+    };
+  }
+  Future<AppResponse<Map<String, dynamic>>> recharge({required Recharge recharge}) async {
+    try {
+      final headers = await _getAuthHeaders();
+      final response = await http.post(
+        Uri.parse(Endpoints.initRecharge),
+        headers: headers,
+        body: jsonEncode(recharge.toJson()),
+      );
+      
+      final responseData = jsonDecode(response.body);
+      return AppResponse<Map<String, dynamic>>.fromJson(
+        responseData as Map<String, dynamic>,
+        (json) => json as Map<String, dynamic>,
+      );
+    } catch (e) {
+      // Handle errors appropriately
+      rethrow;
+    }
+  }
 }

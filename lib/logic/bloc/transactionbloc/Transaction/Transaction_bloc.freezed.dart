@@ -55,7 +55,7 @@ extension TransactionStatePatterns on TransactionState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,TResult Function( LoadingpaymentInitiation value)?  loadinpaymentinitiation,TResult Function( PaymentInitiationSuccessfull value)?  paymentinitiationSuccessfull,TResult Function( PaymentInitiationFailed value)?  paymentinitiationFailed,TResult Function( LoadingtoSendMoney value)?  loadingtosendmoney,TResult Function( SendMoneySuccessfully value)?  sendMoneySuccessfully,TResult Function( SendMoneyFailed value)?  sendMoneyFailed,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,TResult Function( LoadingpaymentInitiation value)?  loadinpaymentinitiation,TResult Function( PaymentInitiationSuccessfull value)?  paymentinitiationSuccessfull,TResult Function( PaymentInitiationFailed value)?  paymentinitiationFailed,TResult Function( LoadingtoSendMoney value)?  loadingtosendmoney,TResult Function( SendMoneySuccessfully value)?  sendMoneySuccessfully,TResult Function( SendMoneyFailed value)?  sendMoneyFailed,TResult Function( LodingAccessTokem value)?  momopaymentaccesstokenloading,TResult Function( MomoPaymentAccessTokenLoadingSuccessfull value)?  momopaymentaccesstokenloadingsuccessfull,TResult Function( MomoPaymentAccessTokenLoadingFailed value)?  momopaymentaccesstokenloadingfailed,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case Initial() when initial != null:
@@ -65,7 +65,10 @@ return paymentinitiationSuccessfull(_that);case PaymentInitiationFailed() when p
 return paymentinitiationFailed(_that);case LoadingtoSendMoney() when loadingtosendmoney != null:
 return loadingtosendmoney(_that);case SendMoneySuccessfully() when sendMoneySuccessfully != null:
 return sendMoneySuccessfully(_that);case SendMoneyFailed() when sendMoneyFailed != null:
-return sendMoneyFailed(_that);case _:
+return sendMoneyFailed(_that);case LodingAccessTokem() when momopaymentaccesstokenloading != null:
+return momopaymentaccesstokenloading(_that);case MomoPaymentAccessTokenLoadingSuccessfull() when momopaymentaccesstokenloadingsuccessfull != null:
+return momopaymentaccesstokenloadingsuccessfull(_that);case MomoPaymentAccessTokenLoadingFailed() when momopaymentaccesstokenloadingfailed != null:
+return momopaymentaccesstokenloadingfailed(_that);case _:
   return orElse();
 
 }
@@ -83,7 +86,7 @@ return sendMoneyFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,required TResult Function( LoadingpaymentInitiation value)  loadinpaymentinitiation,required TResult Function( PaymentInitiationSuccessfull value)  paymentinitiationSuccessfull,required TResult Function( PaymentInitiationFailed value)  paymentinitiationFailed,required TResult Function( LoadingtoSendMoney value)  loadingtosendmoney,required TResult Function( SendMoneySuccessfully value)  sendMoneySuccessfully,required TResult Function( SendMoneyFailed value)  sendMoneyFailed,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,required TResult Function( LoadingpaymentInitiation value)  loadinpaymentinitiation,required TResult Function( PaymentInitiationSuccessfull value)  paymentinitiationSuccessfull,required TResult Function( PaymentInitiationFailed value)  paymentinitiationFailed,required TResult Function( LoadingtoSendMoney value)  loadingtosendmoney,required TResult Function( SendMoneySuccessfully value)  sendMoneySuccessfully,required TResult Function( SendMoneyFailed value)  sendMoneyFailed,required TResult Function( LodingAccessTokem value)  momopaymentaccesstokenloading,required TResult Function( MomoPaymentAccessTokenLoadingSuccessfull value)  momopaymentaccesstokenloadingsuccessfull,required TResult Function( MomoPaymentAccessTokenLoadingFailed value)  momopaymentaccesstokenloadingfailed,}){
 final _that = this;
 switch (_that) {
 case Initial():
@@ -93,7 +96,10 @@ return paymentinitiationSuccessfull(_that);case PaymentInitiationFailed():
 return paymentinitiationFailed(_that);case LoadingtoSendMoney():
 return loadingtosendmoney(_that);case SendMoneySuccessfully():
 return sendMoneySuccessfully(_that);case SendMoneyFailed():
-return sendMoneyFailed(_that);case _:
+return sendMoneyFailed(_that);case LodingAccessTokem():
+return momopaymentaccesstokenloading(_that);case MomoPaymentAccessTokenLoadingSuccessfull():
+return momopaymentaccesstokenloadingsuccessfull(_that);case MomoPaymentAccessTokenLoadingFailed():
+return momopaymentaccesstokenloadingfailed(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -110,7 +116,7 @@ return sendMoneyFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,TResult? Function( LoadingpaymentInitiation value)?  loadinpaymentinitiation,TResult? Function( PaymentInitiationSuccessfull value)?  paymentinitiationSuccessfull,TResult? Function( PaymentInitiationFailed value)?  paymentinitiationFailed,TResult? Function( LoadingtoSendMoney value)?  loadingtosendmoney,TResult? Function( SendMoneySuccessfully value)?  sendMoneySuccessfully,TResult? Function( SendMoneyFailed value)?  sendMoneyFailed,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,TResult? Function( LoadingpaymentInitiation value)?  loadinpaymentinitiation,TResult? Function( PaymentInitiationSuccessfull value)?  paymentinitiationSuccessfull,TResult? Function( PaymentInitiationFailed value)?  paymentinitiationFailed,TResult? Function( LoadingtoSendMoney value)?  loadingtosendmoney,TResult? Function( SendMoneySuccessfully value)?  sendMoneySuccessfully,TResult? Function( SendMoneyFailed value)?  sendMoneyFailed,TResult? Function( LodingAccessTokem value)?  momopaymentaccesstokenloading,TResult? Function( MomoPaymentAccessTokenLoadingSuccessfull value)?  momopaymentaccesstokenloadingsuccessfull,TResult? Function( MomoPaymentAccessTokenLoadingFailed value)?  momopaymentaccesstokenloadingfailed,}){
 final _that = this;
 switch (_that) {
 case Initial() when initial != null:
@@ -120,7 +126,10 @@ return paymentinitiationSuccessfull(_that);case PaymentInitiationFailed() when p
 return paymentinitiationFailed(_that);case LoadingtoSendMoney() when loadingtosendmoney != null:
 return loadingtosendmoney(_that);case SendMoneySuccessfully() when sendMoneySuccessfully != null:
 return sendMoneySuccessfully(_that);case SendMoneyFailed() when sendMoneyFailed != null:
-return sendMoneyFailed(_that);case _:
+return sendMoneyFailed(_that);case LodingAccessTokem() when momopaymentaccesstokenloading != null:
+return momopaymentaccesstokenloading(_that);case MomoPaymentAccessTokenLoadingSuccessfull() when momopaymentaccesstokenloadingsuccessfull != null:
+return momopaymentaccesstokenloadingsuccessfull(_that);case MomoPaymentAccessTokenLoadingFailed() when momopaymentaccesstokenloadingfailed != null:
+return momopaymentaccesstokenloadingfailed(_that);case _:
   return null;
 
 }
@@ -137,7 +146,7 @@ return sendMoneyFailed(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loadinpaymentinitiation,TResult Function( AppResponse<Map<String, dynamic>> response)?  paymentinitiationSuccessfull,TResult Function( String errormessga)?  paymentinitiationFailed,TResult Function()?  loadingtosendmoney,TResult Function( AppResponse<Map<String, dynamic>> response)?  sendMoneySuccessfully,TResult Function( String errromessage)?  sendMoneyFailed,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loadinpaymentinitiation,TResult Function( AppResponse<Map<String, dynamic>> response)?  paymentinitiationSuccessfull,TResult Function( String errormessga)?  paymentinitiationFailed,TResult Function()?  loadingtosendmoney,TResult Function( AppResponse<Map<String, dynamic>> response)?  sendMoneySuccessfully,TResult Function( String errromessage)?  sendMoneyFailed,TResult Function()?  momopaymentaccesstokenloading,TResult Function( AppResponse<Map<String, dynamic>> response)?  momopaymentaccesstokenloadingsuccessfull,TResult Function( String errormessga)?  momopaymentaccesstokenloadingfailed,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial();case LoadingpaymentInitiation() when loadinpaymentinitiation != null:
@@ -146,7 +155,10 @@ return paymentinitiationSuccessfull(_that.response);case PaymentInitiationFailed
 return paymentinitiationFailed(_that.errormessga);case LoadingtoSendMoney() when loadingtosendmoney != null:
 return loadingtosendmoney();case SendMoneySuccessfully() when sendMoneySuccessfully != null:
 return sendMoneySuccessfully(_that.response);case SendMoneyFailed() when sendMoneyFailed != null:
-return sendMoneyFailed(_that.errromessage);case _:
+return sendMoneyFailed(_that.errromessage);case LodingAccessTokem() when momopaymentaccesstokenloading != null:
+return momopaymentaccesstokenloading();case MomoPaymentAccessTokenLoadingSuccessfull() when momopaymentaccesstokenloadingsuccessfull != null:
+return momopaymentaccesstokenloadingsuccessfull(_that.response);case MomoPaymentAccessTokenLoadingFailed() when momopaymentaccesstokenloadingfailed != null:
+return momopaymentaccesstokenloadingfailed(_that.errormessga);case _:
   return orElse();
 
 }
@@ -164,7 +176,7 @@ return sendMoneyFailed(_that.errromessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loadinpaymentinitiation,required TResult Function( AppResponse<Map<String, dynamic>> response)  paymentinitiationSuccessfull,required TResult Function( String errormessga)  paymentinitiationFailed,required TResult Function()  loadingtosendmoney,required TResult Function( AppResponse<Map<String, dynamic>> response)  sendMoneySuccessfully,required TResult Function( String errromessage)  sendMoneyFailed,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loadinpaymentinitiation,required TResult Function( AppResponse<Map<String, dynamic>> response)  paymentinitiationSuccessfull,required TResult Function( String errormessga)  paymentinitiationFailed,required TResult Function()  loadingtosendmoney,required TResult Function( AppResponse<Map<String, dynamic>> response)  sendMoneySuccessfully,required TResult Function( String errromessage)  sendMoneyFailed,required TResult Function()  momopaymentaccesstokenloading,required TResult Function( AppResponse<Map<String, dynamic>> response)  momopaymentaccesstokenloadingsuccessfull,required TResult Function( String errormessga)  momopaymentaccesstokenloadingfailed,}) {final _that = this;
 switch (_that) {
 case Initial():
 return initial();case LoadingpaymentInitiation():
@@ -173,7 +185,10 @@ return paymentinitiationSuccessfull(_that.response);case PaymentInitiationFailed
 return paymentinitiationFailed(_that.errormessga);case LoadingtoSendMoney():
 return loadingtosendmoney();case SendMoneySuccessfully():
 return sendMoneySuccessfully(_that.response);case SendMoneyFailed():
-return sendMoneyFailed(_that.errromessage);case _:
+return sendMoneyFailed(_that.errromessage);case LodingAccessTokem():
+return momopaymentaccesstokenloading();case MomoPaymentAccessTokenLoadingSuccessfull():
+return momopaymentaccesstokenloadingsuccessfull(_that.response);case MomoPaymentAccessTokenLoadingFailed():
+return momopaymentaccesstokenloadingfailed(_that.errormessga);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -190,7 +205,7 @@ return sendMoneyFailed(_that.errromessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loadinpaymentinitiation,TResult? Function( AppResponse<Map<String, dynamic>> response)?  paymentinitiationSuccessfull,TResult? Function( String errormessga)?  paymentinitiationFailed,TResult? Function()?  loadingtosendmoney,TResult? Function( AppResponse<Map<String, dynamic>> response)?  sendMoneySuccessfully,TResult? Function( String errromessage)?  sendMoneyFailed,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loadinpaymentinitiation,TResult? Function( AppResponse<Map<String, dynamic>> response)?  paymentinitiationSuccessfull,TResult? Function( String errormessga)?  paymentinitiationFailed,TResult? Function()?  loadingtosendmoney,TResult? Function( AppResponse<Map<String, dynamic>> response)?  sendMoneySuccessfully,TResult? Function( String errromessage)?  sendMoneyFailed,TResult? Function()?  momopaymentaccesstokenloading,TResult? Function( AppResponse<Map<String, dynamic>> response)?  momopaymentaccesstokenloadingsuccessfull,TResult? Function( String errormessga)?  momopaymentaccesstokenloadingfailed,}) {final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial();case LoadingpaymentInitiation() when loadinpaymentinitiation != null:
@@ -199,7 +214,10 @@ return paymentinitiationSuccessfull(_that.response);case PaymentInitiationFailed
 return paymentinitiationFailed(_that.errormessga);case LoadingtoSendMoney() when loadingtosendmoney != null:
 return loadingtosendmoney();case SendMoneySuccessfully() when sendMoneySuccessfully != null:
 return sendMoneySuccessfully(_that.response);case SendMoneyFailed() when sendMoneyFailed != null:
-return sendMoneyFailed(_that.errromessage);case _:
+return sendMoneyFailed(_that.errromessage);case LodingAccessTokem() when momopaymentaccesstokenloading != null:
+return momopaymentaccesstokenloading();case MomoPaymentAccessTokenLoadingSuccessfull() when momopaymentaccesstokenloadingsuccessfull != null:
+return momopaymentaccesstokenloadingsuccessfull(_that.response);case MomoPaymentAccessTokenLoadingFailed() when momopaymentaccesstokenloadingfailed != null:
+return momopaymentaccesstokenloadingfailed(_that.errormessga);case _:
   return null;
 
 }
@@ -568,6 +586,170 @@ as String,
 }
 
 /// @nodoc
+
+
+class LodingAccessTokem implements TransactionState {
+  const LodingAccessTokem();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LodingAccessTokem);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'TransactionState.momopaymentaccesstokenloading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class MomoPaymentAccessTokenLoadingSuccessfull implements TransactionState {
+  const MomoPaymentAccessTokenLoadingSuccessfull({required this.response});
+  
+
+ final  AppResponse<Map<String, dynamic>> response;
+
+/// Create a copy of TransactionState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MomoPaymentAccessTokenLoadingSuccessfullCopyWith<MomoPaymentAccessTokenLoadingSuccessfull> get copyWith => _$MomoPaymentAccessTokenLoadingSuccessfullCopyWithImpl<MomoPaymentAccessTokenLoadingSuccessfull>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MomoPaymentAccessTokenLoadingSuccessfull&&(identical(other.response, response) || other.response == response));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,response);
+
+@override
+String toString() {
+  return 'TransactionState.momopaymentaccesstokenloadingsuccessfull(response: $response)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $MomoPaymentAccessTokenLoadingSuccessfullCopyWith<$Res> implements $TransactionStateCopyWith<$Res> {
+  factory $MomoPaymentAccessTokenLoadingSuccessfullCopyWith(MomoPaymentAccessTokenLoadingSuccessfull value, $Res Function(MomoPaymentAccessTokenLoadingSuccessfull) _then) = _$MomoPaymentAccessTokenLoadingSuccessfullCopyWithImpl;
+@useResult
+$Res call({
+ AppResponse<Map<String, dynamic>> response
+});
+
+
+
+
+}
+/// @nodoc
+class _$MomoPaymentAccessTokenLoadingSuccessfullCopyWithImpl<$Res>
+    implements $MomoPaymentAccessTokenLoadingSuccessfullCopyWith<$Res> {
+  _$MomoPaymentAccessTokenLoadingSuccessfullCopyWithImpl(this._self, this._then);
+
+  final MomoPaymentAccessTokenLoadingSuccessfull _self;
+  final $Res Function(MomoPaymentAccessTokenLoadingSuccessfull) _then;
+
+/// Create a copy of TransactionState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? response = null,}) {
+  return _then(MomoPaymentAccessTokenLoadingSuccessfull(
+response: null == response ? _self.response : response // ignore: cast_nullable_to_non_nullable
+as AppResponse<Map<String, dynamic>>,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class MomoPaymentAccessTokenLoadingFailed implements TransactionState {
+  const MomoPaymentAccessTokenLoadingFailed({required this.errormessga});
+  
+
+ final  String errormessga;
+
+/// Create a copy of TransactionState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MomoPaymentAccessTokenLoadingFailedCopyWith<MomoPaymentAccessTokenLoadingFailed> get copyWith => _$MomoPaymentAccessTokenLoadingFailedCopyWithImpl<MomoPaymentAccessTokenLoadingFailed>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MomoPaymentAccessTokenLoadingFailed&&(identical(other.errormessga, errormessga) || other.errormessga == errormessga));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,errormessga);
+
+@override
+String toString() {
+  return 'TransactionState.momopaymentaccesstokenloadingfailed(errormessga: $errormessga)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $MomoPaymentAccessTokenLoadingFailedCopyWith<$Res> implements $TransactionStateCopyWith<$Res> {
+  factory $MomoPaymentAccessTokenLoadingFailedCopyWith(MomoPaymentAccessTokenLoadingFailed value, $Res Function(MomoPaymentAccessTokenLoadingFailed) _then) = _$MomoPaymentAccessTokenLoadingFailedCopyWithImpl;
+@useResult
+$Res call({
+ String errormessga
+});
+
+
+
+
+}
+/// @nodoc
+class _$MomoPaymentAccessTokenLoadingFailedCopyWithImpl<$Res>
+    implements $MomoPaymentAccessTokenLoadingFailedCopyWith<$Res> {
+  _$MomoPaymentAccessTokenLoadingFailedCopyWithImpl(this._self, this._then);
+
+  final MomoPaymentAccessTokenLoadingFailed _self;
+  final $Res Function(MomoPaymentAccessTokenLoadingFailed) _then;
+
+/// Create a copy of TransactionState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errormessga = null,}) {
+  return _then(MomoPaymentAccessTokenLoadingFailed(
+errormessga: null == errormessga ? _self.errormessga : errormessga // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$TransactionEvent {
 
 
@@ -611,13 +793,14 @@ extension TransactionEventPatterns on TransactionEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( InitiatTransaction value)?  transactionInitiation,TResult Function( Reset value)?  reset,TResult Function( SendMoneyToAnotherAccount value)?  sendMoney,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( InitiatTransaction value)?  transactionInitiation,TResult Function( Reset value)?  reset,TResult Function( SendMoneyToAnotherAccount value)?  sendMoney,TResult Function( MomoAccessToken value)?  momoaccesstoken,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case InitiatTransaction() when transactionInitiation != null:
 return transactionInitiation(_that);case Reset() when reset != null:
 return reset(_that);case SendMoneyToAnotherAccount() when sendMoney != null:
-return sendMoney(_that);case _:
+return sendMoney(_that);case MomoAccessToken() when momoaccesstoken != null:
+return momoaccesstoken(_that);case _:
   return orElse();
 
 }
@@ -635,13 +818,14 @@ return sendMoney(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( InitiatTransaction value)  transactionInitiation,required TResult Function( Reset value)  reset,required TResult Function( SendMoneyToAnotherAccount value)  sendMoney,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( InitiatTransaction value)  transactionInitiation,required TResult Function( Reset value)  reset,required TResult Function( SendMoneyToAnotherAccount value)  sendMoney,required TResult Function( MomoAccessToken value)  momoaccesstoken,}){
 final _that = this;
 switch (_that) {
 case InitiatTransaction():
 return transactionInitiation(_that);case Reset():
 return reset(_that);case SendMoneyToAnotherAccount():
-return sendMoney(_that);}
+return sendMoney(_that);case MomoAccessToken():
+return momoaccesstoken(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -655,13 +839,14 @@ return sendMoney(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( InitiatTransaction value)?  transactionInitiation,TResult? Function( Reset value)?  reset,TResult? Function( SendMoneyToAnotherAccount value)?  sendMoney,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( InitiatTransaction value)?  transactionInitiation,TResult? Function( Reset value)?  reset,TResult? Function( SendMoneyToAnotherAccount value)?  sendMoney,TResult? Function( MomoAccessToken value)?  momoaccesstoken,}){
 final _that = this;
 switch (_that) {
 case InitiatTransaction() when transactionInitiation != null:
 return transactionInitiation(_that);case Reset() when reset != null:
 return reset(_that);case SendMoneyToAnotherAccount() when sendMoney != null:
-return sendMoney(_that);case _:
+return sendMoney(_that);case MomoAccessToken() when momoaccesstoken != null:
+return momoaccesstoken(_that);case _:
   return null;
 
 }
@@ -678,12 +863,13 @@ return sendMoney(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Transaction transaction)?  transactionInitiation,TResult Function()?  reset,TResult Function( SendMoney sendmoney)?  sendMoney,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Transaction transaction)?  transactionInitiation,TResult Function()?  reset,TResult Function( SendMoney sendmoney)?  sendMoney,TResult Function()?  momoaccesstoken,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case InitiatTransaction() when transactionInitiation != null:
 return transactionInitiation(_that.transaction);case Reset() when reset != null:
 return reset();case SendMoneyToAnotherAccount() when sendMoney != null:
-return sendMoney(_that.sendmoney);case _:
+return sendMoney(_that.sendmoney);case MomoAccessToken() when momoaccesstoken != null:
+return momoaccesstoken();case _:
   return orElse();
 
 }
@@ -701,12 +887,13 @@ return sendMoney(_that.sendmoney);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Transaction transaction)  transactionInitiation,required TResult Function()  reset,required TResult Function( SendMoney sendmoney)  sendMoney,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Transaction transaction)  transactionInitiation,required TResult Function()  reset,required TResult Function( SendMoney sendmoney)  sendMoney,required TResult Function()  momoaccesstoken,}) {final _that = this;
 switch (_that) {
 case InitiatTransaction():
 return transactionInitiation(_that.transaction);case Reset():
 return reset();case SendMoneyToAnotherAccount():
-return sendMoney(_that.sendmoney);}
+return sendMoney(_that.sendmoney);case MomoAccessToken():
+return momoaccesstoken();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -720,12 +907,13 @@ return sendMoney(_that.sendmoney);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Transaction transaction)?  transactionInitiation,TResult? Function()?  reset,TResult? Function( SendMoney sendmoney)?  sendMoney,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Transaction transaction)?  transactionInitiation,TResult? Function()?  reset,TResult? Function( SendMoney sendmoney)?  sendMoney,TResult? Function()?  momoaccesstoken,}) {final _that = this;
 switch (_that) {
 case InitiatTransaction() when transactionInitiation != null:
 return transactionInitiation(_that.transaction);case Reset() when reset != null:
 return reset();case SendMoneyToAnotherAccount() when sendMoney != null:
-return sendMoney(_that.sendmoney);case _:
+return sendMoney(_that.sendmoney);case MomoAccessToken() when momoaccesstoken != null:
+return momoaccesstoken();case _:
   return null;
 
 }
@@ -914,5 +1102,37 @@ $SendMoneyCopyWith<$Res> get sendmoney {
   });
 }
 }
+
+/// @nodoc
+
+
+class MomoAccessToken implements TransactionEvent {
+  const MomoAccessToken();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MomoAccessToken);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'TransactionEvent.momoaccesstoken()';
+}
+
+
+}
+
+
+
 
 // dart format on

@@ -37,4 +37,8 @@ class Endpoints {
   // 📡 Paiement NFC
   static const String nfcCreateTransaction = '$baseUrl/nfc/prepare';
   static const String nfcConfirmTransaction = '$baseUrl/nfc/confirm';
+
+  // Payment by momo
+static const String momoSetupToken = '$baseUrl/momo/setup';
+
 }
